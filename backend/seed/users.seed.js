@@ -1,0 +1,77 @@
+import bcrypt from "bcryptjs";
+
+const users = [
+  {
+    name: "ادمین",
+    email: "admin@email.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: true,
+    isVerified: true,
+  },
+  {
+    name: "محمد کاظمی",
+    email: "kazemi@gmail.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: false,
+    isVerified: true,
+  },
+  {
+    name: "امیر موسوی",
+    email: "mosavi@gmail.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: false,
+    isVerified: true,
+  },
+  {
+    _id: "617a1b7d8f9d8b001f2e3a01",
+    name: "محمد جوادی",
+    email: "m.javadi@example.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: false,
+    isVerified: true,
+    createdAt: new Date("2023-03-10"),
+    updatedAt: new Date("2023-03-10"),
+  },
+  {
+    _id: "617a1b7d8f9d8b001f2e3a02",
+    name: "علی رضوی",
+    email: "a.rezavi@example.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: false,
+    isVerified: true,
+    createdAt: new Date("2023-03-12"),
+    updatedAt: new Date("2023-03-12"),
+  },
+  {
+    _id: "617a1b7d8f9d8b001f2e3a03",
+    name: "فاطمه زاهدی",
+    email: "f.zahedi@example.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: true,
+    isVerified: true,
+    createdAt: new Date("2023-03-05"),
+    updatedAt: new Date("2023-03-05"),
+  },
+  {
+    _id: "617a1b7d8f9d8b001f2e3a04",
+    name: "حسین مرادی",
+    email: "h.moradi@example.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: false,
+    isVerified: true,
+    createdAt: new Date("2023-03-15"),
+    updatedAt: new Date("2023-03-15"),
+  },
+  {
+    _id: "617a1b7d8f9d8b001f2e3a05",
+    name: "مریم حسینی",
+    email: "m.hosseini@example.com",
+    password: bcrypt.hashSync("12345678", 10),
+    isAdmin: false,
+    isVerified: true,
+    createdAt: new Date("2023-03-20"),
+    updatedAt: new Date("2023-03-20"),
+  },
+];
+
+export default users;
