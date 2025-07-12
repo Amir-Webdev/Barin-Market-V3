@@ -2,6 +2,9 @@ import { toast } from "react-toastify";
 import { useCreateReviewMutation } from "../../store/slices/api/productApiSlice";
 import Loader from "../UI/Loader";
 import { useState } from "react";
+import Button from "../UI/Button";
+import { Link } from "react-router-dom";
+import Message from "../UI/Message";
 
 function ReviewForm({ product, userInfo, refetch }) {
   const [review, setReview] = useState({
@@ -42,7 +45,7 @@ function ReviewForm({ product, userInfo, refetch }) {
               <span className="label-text">امتیاز شما به این محصول</span>
             </label>
             <select
-              className="select select-bordered col-span-3"
+              className="select bg-background border border-border col-span-3"
               value={review.rating}
               onChange={(e) =>
                 setReview({
@@ -65,7 +68,7 @@ function ReviewForm({ product, userInfo, refetch }) {
               <span className="label-text">متن نظر</span>
             </label>
             <textarea
-              className="textarea bg-white border h-32 col-span-3"
+              className="textarea bg-background border border-border h-32 col-span-3"
               placeholder="تجربه خود از استفاده این محصول را بنویسید..."
               value={review.comment}
               onChange={(e) =>
@@ -76,15 +79,15 @@ function ReviewForm({ product, userInfo, refetch }) {
               aria-label="متن نظر"
             ></textarea>
 
-            <div className="">
-              <button
+            <div>
+              <Button
                 type="submit"
-                className="btn btn-success"
+                color="green"
                 disabled={isCreatingReview}
                 aria-label="ثبت نظر"
               >
                 {isCreatingReview ? "در حال ارسال..." : "ثبت نظر"}
-              </button>
+              </Button>
             </div>
           </div>
         </form>

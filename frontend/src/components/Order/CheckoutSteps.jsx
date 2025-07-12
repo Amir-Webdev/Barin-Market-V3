@@ -23,14 +23,45 @@ function CheckoutSteps({ step }) {
   ];
 
   return (
-    <div className="w-full px-4 mb-8 flex justify-center">
+    <ul className="steps w-full mb-8">
+      <li className={`step ${step >= 1 && "step-info"}`}>
+        <span className="step-icon">
+          <FaUser />
+        </span>
+        ورود
+      </li>
+      <li className={`step ${step >= 2 && "step-info"}`}>
+        <span className="step-icon">
+          <FaTruck />
+        </span>
+        اطلاعات ارسال
+      </li>
+      <li className={`step ${step >= 3 && "step-info"}`}>
+        <span className="step-icon">
+          <FaCreditCard />
+        </span>
+        پرداخت
+      </li>
+      <li className={`step ${step === 4 && "step-info"}`}>
+        <span className="step-icon">
+          <FaClipboardCheck />
+        </span>
+        ثبت سفارش
+      </li>
+    </ul>
+  );
+}
+
+export default CheckoutSteps;
+
+/*  <div className="w-full px-4 mb-8 flex justify-center">
       <div className="flex items-center justify-between w-full max-w-4xl relative">
         {steps.map(({ id, label, path, icon }, index) => (
           <div
             key={id}
             className="flex-1 flex flex-col items-center relative text-center z-10"
           >
-            {/* Connector line */}
+          
             {index !== 0 && (
               <div
                 className={`absolute top-7 w-full h-1 ${
@@ -39,7 +70,6 @@ function CheckoutSteps({ step }) {
               />
             )}
 
-            {/* Step circle */}
             <button
               onClick={() => step >= id && navigate(path)}
               disabled={step < id}
@@ -59,13 +89,8 @@ function CheckoutSteps({ step }) {
               )}
             </button>
 
-            {/* Label */}
             <span className="text-sm mt-2 font-medium">{label}</span>
           </div>
         ))}
       </div>
-    </div>
-  );
-}
-
-export default CheckoutSteps;
+    </div>*/

@@ -35,7 +35,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, userInfo }) {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-surface text-base-content min-h-full w-72 p-4 pt-24 relative text-base">
+        <ul className="menu bg-surface min-h-full w-72 p-4 pt-24 relative text-base">
           <button
             className="absolute left-6 top-4 p-4 backdrop-blur-md rounded-xl bg-white/70 border"
             onClick={toggleMenu}

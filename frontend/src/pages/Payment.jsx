@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import CheckoutSteps from "../components/CheckoutSteps";
+import CheckoutSteps from "../components/Order/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../store/slices/cart/cartSlice";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
+import Button from "../components/UI/Button.jsx";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState("ZarinPal");
@@ -36,11 +37,10 @@ function Payment() {
         }}
       />
 
-      <div className="flex flex-col">
-        <CheckoutSteps step={3} isRTL={true} /> {/* Added isRTL prop */}
-        <h1 className="text-2xl font-semibold mb-4 text-right">روش پرداخت</h1>
-        <form onSubmit={submitHandler} className="text-right">
-          {/* RTL styling */}
+      <div className="max-w-xl mx-auto my-4 px-4 py-6">
+        <CheckoutSteps step={3} />
+        <h1 className="text-2xl font-semibold mb-6 text-center">روش پرداخت</h1>
+        <form onSubmit={submitHandler}>
           <div className="mb-6">
             <label htmlFor="paymentMethod" className="block text-lg mb-2">
               روش پرداخت را انتخاب کنید
@@ -54,21 +54,17 @@ function Payment() {
                   value="ZarinPal"
                   checked={paymentMethod === "ZarinPal"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="radio radio-primary"
+                  className="radio radio-info"
                 />
                 <label htmlFor="ZarinPal" className="text-lg">
                   زرین‌پال
                 </label>
               </div>
-              {/* Add more payment methods if needed */}
             </div>
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary w-full mt-6 py-3 text-xl"
-          >
-            ادامه
-          </button>
+          <div className="flex justify-center">
+            <Button type="submit">ادامه</Button>
+          </div>
         </form>
       </div>
     </>

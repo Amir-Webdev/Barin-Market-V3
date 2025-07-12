@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import CheckoutSteps from "../components/CheckoutSteps";
+import CheckoutSteps from "../components/Order/CheckoutSteps";
 import { useCreateOrderMutation } from "../store/slices/api/orderApiSlice";
 import { clearCartItems } from "../store/slices/cart/cartSlice";
-import Message from "../components/Message";
+import Message from "../components/UI/Message";
 import Loader from "../components/UI/Loader";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
-import { formatNumber } from "../utils/toPersianDigits.js";
+import { formatNumber, toPersianDigits } from "../utils/toPersianDigits.js";
+import Button from "../components/UI/Button.jsx";
 
 function PlaceOrder() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function PlaceOrder() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="max-w-6xl mx-auto my-4 px-4 py-6">
       <SEOMeta
         title="تکمیل سفارش | بارین مارکت"
         description="جزئیات سفارش خود را بررسی و خریدتان را نهایی کنید"
@@ -53,11 +54,13 @@ function PlaceOrder() {
         }}
       />
 
-      <CheckoutSteps step="4" isRTL={true} />
+      <div className="max-w-2xl mx-auto">
+        <CheckoutSteps step="4" />
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 rtl px-4 py-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 py-6">
         <div className="md:col-span-2 space-y-6">
-          <div className="bg-white shadow-md rounded-xl p-4">
+          <div className="bg-white border rounded-xl p-4">
             <h2 className="text-lg font-bold mb-2">اطلاعات ارسال</h2>
             <p className="text-sm">
               <strong>آدرس: </strong>
@@ -66,7 +69,7 @@ function PlaceOrder() {
             </p>
           </div>
 
-          <div className="bg-white shadow-md rounded-xl p-4">
+          <div className="bg-white border rounded-xl p-4">
             <h2 className="text-lg font-bold mb-2">روش پرداخت</h2>
             <p className="text-sm">
               <strong>روش: </strong>
@@ -76,7 +79,7 @@ function PlaceOrder() {
             </p>
           </div>
 
-          <div className="bg-white shadow-md rounded-xl p-4">
+          <div className="bg-white border rounded-xl p-4">
             <h2 className="text-lg font-bold mb-4">محصولات سفارش</h2>
             {cart.cartItems.length === 0 ? (
               <Message>سبد خرید شما خالی است</Message>
@@ -98,10 +101,9 @@ function PlaceOrder() {
                       </Link>
                     </div>
                     <div className="text-sm">
-                      {item.quantity} × {item.price.toLocaleString("fa-IR")}{" "}
-                      تومان ={" "}
-                      {(item.quantity * item.price).toLocaleString("fa-IR")}{" "}
-                      تومان
+                      {toPersianDigits(item.quantity)} ×{" "}
+                      {formatNumber(item.price)} تومان =
+                      {formatNumber(item.quantity * item.price)} تومان
                     </div>
                   </li>
                 ))}
@@ -110,23 +112,23 @@ function PlaceOrder() {
           </div>
         </div>
 
-        <div className="bg-white shadow-md rounded-xl p-4 space-y-4">
+        <div className="bg-white border max-h-64 rounded-xl p-4 flex flex-col gap-4">
           <h2 className="text-lg font-bold text-right">خلاصه سفارش</h2>
           <div className="flex justify-between text-sm">
             <span>محصولات:</span>
-            <span>{formatNumber(cart.itemsPrice)} تومان</span>
+            <span>{formatNumber(Math.trunc(cart.itemsPrice))} تومان</span>
           </div>
           <div className="flex justify-between text-sm">
             <span>هزینه ارسال:</span>
-            <span>{formatNumber(cart.shippingPrice)} تومان</span>
+            <span>{formatNumber(Math.trunc(cart.shippingPrice))} تومان</span>
           </div>
           <div className="flex justify-between text-sm">
             <span>مالیات:</span>
-            <span>{formatNumber(cart.taxPrice)} تومان</span>
+            <span>{formatNumber(Math.trunc(cart.taxPrice))} تومان</span>
           </div>
           <div className="flex justify-between text-sm font-bold">
             <span>جمع کل:</span>
-            <span>{formatNumber(cart.totalPrice)} تومان</span>
+            <span>{formatNumber(Math.trunc(cart.totalPrice))} تومان</span>
           </div>
 
           {error && (
@@ -137,17 +139,16 @@ function PlaceOrder() {
             </div>
           )}
 
-          <button
-            type="button"
-            className="btn btn-primary w-full"
+          <Button
             disabled={cart.cartItems.length === 0 || isLoading}
             onClick={placeOrderHandler}
+            wfull
           >
             {isLoading ? "در حال ثبت سفارش..." : "تکمیل سفارش"}
-          </button>
-
-          {isLoading && <Loader />}
+          </Button>
         </div>
+
+        {isLoading && <Loader />}
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ function Message({ type = "info", children, title, dismissible = false }) {
 
   return (
     <div className="p-6">
-      <div className={`alert alert-${color} shadow-md relative`}>
+      <div className={`alert alert-${color} shadow-md relative`} role="alert">
         {icon}
         <div>
           {title && <h3 className="font-bold mb-0.5">{title}</h3>}

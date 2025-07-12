@@ -29,11 +29,11 @@ function Dashboard() {
       <div className="md:w-56">
         <DashboardSidebar />
       </div>
+      {tab === "profile" && <ProfileDashboard userInfo={userInfo} />}
       {tab === "address" && <AddressDashboard />}
       {tab === "orders" && <OrderDashboard />}
       {tab === "wishlist" && <WishlistDashboard userId={userId} />}
       {tab === "comments" && <CommentDashboard userId={userId} />}
-      {tab === "profile" && <ProfileDashboard userInfo={userInfo} />}
       {tab === "support" && <ContactSupportDashboard />}
       {!tab && <div>لطفا یکی از داشبورد ها را انتخاب کنید</div>}
     </div>

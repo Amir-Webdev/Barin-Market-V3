@@ -30,7 +30,7 @@ function Header() {
   }
 
   return (
-    <header className="fixed md:sticky md:top-0 top-3 md:right-0 right-4 md:left-0 left-4 md:rounded-none rounded-2xl z-50 bg-surface/85 backdrop-blur-sm shadow-sm md:pb-1">
+    <header className="fixed md:sticky md:top-0 top-3 md:right-0 right-4 md:left-0 left-4 md:rounded-none rounded-2xl z-40 bg-surface/85 backdrop-blur-sm shadow-sm md:pb-1">
       <div className="container mx-auto px-4 flex flex-col">
         <div className="flex h-16 items-center justify-between">
           {!searchOpen && <Logo />}

@@ -7,6 +7,7 @@ import Message from "../components/UI/Message";
 import SEOMeta from "../components/Util/SEOMeta";
 import { addToCart, removeFromCart } from "../store/slices/cart/cartSlice";
 import { formatNumber, toPersianDigits } from "../utils/toPersianDigits";
+import Button from "../components/UI/Button";
 
 function Cart() {
   const navigate = useNavigate();
@@ -66,12 +67,6 @@ function Cart() {
             </div>
             <Message variant="info" className="mt-6 text-center">
               سبد خرید شما خالی است
-              <Link
-                to="/"
-                className="mr-2 text-white hover:underline hover:underline-offset-4 font-medium"
-              >
-                بازگشت به صفحه اصلی
-              </Link>
             </Message>
           </div>
         ) : (
@@ -107,7 +102,7 @@ function Cart() {
 
                   <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
                     <select
-                      className="select select-bordered select-sm w-20"
+                      className="select bg-background border border-border select-sm w-20"
                       value={item.quantity}
                       onChange={(e) =>
                         addToCartHandler(item, Number(e.target.value))
@@ -133,7 +128,7 @@ function Cart() {
 
             {/* Order Summary */}
             <div className="md:col-span-1">
-              <div className="card bg-white shadow-md border">
+              <div className="card bg-white border">
                 <div className="card-body p-6 space-y-6">
                   <h2 className="text-xl font-bold text-gray-800 border-b pb-4">
                     خلاصه سفارش
@@ -154,13 +149,12 @@ function Cart() {
                     </div>
                   </div>
 
-                  <button
-                    className="btn btn-primary w-full py-3 mt-4"
+                  <Button
                     disabled={!cartItems.length}
                     onClick={checkoutHandler}
                   >
                     ادامه جهت پرداخت
-                  </button>
+                  </Button>
 
                   <div className="text-sm text-gray-500 text-center mt-4">
                     هزینه نهایی پس از ثبت آدرس و روش ارسال محاسبه خواهد شد

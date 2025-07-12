@@ -6,6 +6,8 @@ import { setCredentials } from "../store/slices/auth/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/UI/Loader";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
+import Button from "../components/UI/Button.jsx";
+import Logo from "../components/UI/Logo.jsx";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,9 +24,7 @@ function Login() {
   const redirect = searchParams.get("redirect") || "/";
 
   useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
+    if (userInfo) navigate(redirect);
   }, [userInfo, redirect, navigate]);
 
   const submitHandler = async (e) => {
@@ -52,89 +52,78 @@ function Login() {
         }}
       />
 
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-border mx-auto mt-20">
-        <div className="p-6 sm:p-8">
+      <div className="flex flex-col justify-center items-center min-h-screen px-4 -mt-[6rem] md:mt-0">
+        <div className="flex justify-center mb-6">
+          <Logo size="lg" />
+        </div>
+        <div className="w-full max-w-md bg-background border rounded-xl p-6 sm:p-8">
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-800">ورود به حساب</h1>
-            <p className="text-gray-500 mt-2">
+            <p className="text-gray-500 mt-1">
               لطفا ایمیل و رمز عبور خود را وارد کنید
             </p>
           </div>
 
-          <form onSubmit={submitHandler}>
-            <div className="space-y-4">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  ایمیل
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="example@example.com"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoFocus
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  رمز عبور
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
+          <form onSubmit={submitHandler} className="space-y-4">
+            <div className="form-control flex flex-col gap-1">
+              <label htmlFor="email" className="label">
+                <span className="label-text">ایمیل</span>
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="example@example.com"
+                className="input border border-border bg-background"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoFocus
+              />
             </div>
 
-            <button
-              type="submit"
-              className={`w-full mt-6 py-2 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-medium transition ${
-                isLoading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-              disabled={isLoading}
-            >
+            <div className="form-control flex flex-col gap-1">
+              <label htmlFor="password" className="label">
+                <span className="label-text">رمز عبور</span>
+              </label>
+              <input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                className="input border border-border bg-background"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <Button type="submit" disabled={isLoading} wfull outline={false}>
               {isLoading ? (
-                <div className="space-x-4 px-4">
-                  <span>در حال ورود... </span>
-                  <Loader size="md" />
-                </div>
+                <span className="flex items-center gap-2">
+                  در حال ورود...
+                  <Loader size="sm" />
+                </span>
               ) : (
                 "ورود"
               )}
-            </button>
+            </Button>
           </form>
 
-          <div className="flex justify-between mt-6 text-sm text-center">
-            <div className="">
-              <span className="text-gray-600">کاربر جدید هستید؟ </span>
-              <Link
-                to={redirect ? `/register?redirect=${redirect}` : "/register"}
-                className="text-primary hover:text-primary-dark font-medium transition"
-              >
-                ثبت نام کنید
-              </Link>
-            </div>
+          <div className="mt-6 text-sm text-gray-600 space-y-2 text-center">
             <div>
               <Link
                 to="/forget-password"
-                className="text-primary hover:text-primary-dark font-medium transition"
+                className="text-primary hover:underline"
               >
-                فراموشی رمزعبور
+                فراموشی رمز عبور
+              </Link>
+            </div>
+            <div>
+              <span>کاربر جدید هستید؟ </span>
+              <Link
+                to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                className="text-primary hover:underline"
+              >
+                ثبت نام کنید
               </Link>
             </div>
           </div>

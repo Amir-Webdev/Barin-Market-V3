@@ -6,6 +6,8 @@ import { setCredentials } from "../store/slices/auth/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/UI/Loader";
 import SEOMeta from "../components/Util/SEOMeta";
+import Logo from "../components/UI/Logo";
+import Button from "../components/UI/Button";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -61,14 +63,20 @@ function Register() {
         }}
       />
 
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mx-auto mt-20">
-        <div className="p-6 sm:p-8">
+      <div className="flex flex-col justify-center items-center min-h-screen px-4 -mt-[4rem] md:mt-0">
+        <div className="flex justify-center mb-6">
+          <Logo size="lg" />
+        </div>
+        <div className="w-full max-w-md bg-background border border-border rounded-xl p-6 sm:p-8">
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-800">ثبت‌نام</h1>
             <p className="text-gray-500 mt-2">لطفا اطلاعات خود را وارد کنید</p>
           </div>
 
-          <form onSubmit={submitHandler} dir="rtl" className="space-y-4">
+          <form
+            onSubmit={submitHandler}
+            className="flex flex-col justify-center gap-4"
+          >
             <div>
               <label
                 htmlFor="name"
@@ -80,7 +88,7 @@ function Register() {
                 id="name"
                 type="text"
                 placeholder="نام و نام خانوادگی"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                className="input bg-background border border-border"
                 value={formData.name}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -99,7 +107,7 @@ function Register() {
                 id="email"
                 type="email"
                 placeholder="example@example.com"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                className="input bg-background border border-border"
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -117,7 +125,7 @@ function Register() {
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                className="input bg-background border border-border"
                 value={formData.password}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -135,20 +143,14 @@ function Register() {
                 id="confirmPassword"
                 type="password"
                 placeholder="••••••••"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                className="input bg-background border border-border"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 disabled={isLoading}
               />
             </div>
 
-            <button
-              type="submit"
-              className={`w-full mt-6 py-2 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-medium transition ${
-                isLoading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-              disabled={isLoading}
-            >
+            <Button type="submit" disabled={isLoading} wfull>
               {isLoading ? (
                 <div className="space-x-4 px-4">
                   <span>در حال ثبت‌نام...</span>
@@ -157,11 +159,11 @@ function Register() {
               ) : (
                 "ثبت‌نام"
               )}
-            </button>
+            </Button>
           </form>
 
           <div className="mt-6 text-center text-sm">
-            <span className="text-gray-600">قبلاً حساب دارید؟ </span>
+            <span className="text-gray-600">قبلاً ثبت نام کردید؟ </span>
             <Link
               to={redirect ? `/login?redirect=${redirect}` : "/login"}
               className="text-primary hover:text-primary-dark font-medium transition"

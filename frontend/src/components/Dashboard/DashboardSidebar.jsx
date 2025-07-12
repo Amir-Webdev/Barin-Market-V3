@@ -48,7 +48,7 @@ function DashboardSidebar() {
   }
 
   return (
-    <div className="w-full h-full bg-base-200 -mb-8">
+    <div className="w-full h-full bg-surface/40 -mb-8">
       <ul className="menu py-4 px-2 md:p-4 flex flex-col gap-1">
         <li>
           <Link to="/profile?tab=profile">

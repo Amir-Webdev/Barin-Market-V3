@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
 import { formatNumber } from "../utils/toPersianDigits.js";
+import Button from "../components/UI/Button.jsx";
 
 function Order() {
   const [orderStatus, setOrderStatus] = useState();
@@ -66,7 +67,7 @@ function Order() {
     );
 
   return (
-    <div className="flex flex-col">
+    <div className="max-w-6xl mx-auto my-4 px-4 py-6">
       <SEOMeta
         title={`جزئیات سفارش | سفارش #${order._id} | بارین مارکت`}
         description={`مشاهده جزئیات سفارش #${order._id}. اطلاعات پرداخت، ارسال و محصولات را بررسی کنید.`}
@@ -85,7 +86,7 @@ function Order() {
         {/* Left: Order Info */}
         <div className="flex-1 space-y-6">
           {/* Shipping Info */}
-          <div className="card bg-base-100 shadow p-4 space-y-4">
+          <div className="card border p-4 space-y-4">
             <h2 className="text-lg font-semibold text-right mb-2">
               اطلاعات ارسال
             </h2>
@@ -115,7 +116,7 @@ function Order() {
           </div>
 
           {/* Payment Method */}
-          <div className="card bg-base-100 shadow p-4">
+          <div className="card border p-4">
             <h2 className="text-lg font-semibold text-right mb-2">
               روش پرداخت
             </h2>
@@ -131,13 +132,13 @@ function Order() {
                   پرداخت شده در تاریخ {order.paidAt}
                 </Message>
               ) : (
-                <Message type="error">پرداخت نشده</Message>
+                <Message type="danger">پرداخت نشده</Message>
               )}
             </div>
           </div>
 
           {/* Ordered Items */}
-          <div className="card bg-base-100 shadow p-4">
+          <div className="card border p-4">
             <h2 className="text-lg font-semibold text-right mb-4">
               محصولات سفارش
             </h2>
@@ -148,14 +149,6 @@ function Order() {
                   className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 text-right"
                 >
                   <div className="flex items-center gap-4 flex-row-reverse">
-                    <img
-                      src={
-                        item.image ||
-                        "https://ecommerce-v3.s3.ir-thr-at1.arvanstorage.ir/Defaults%2Fimage%20placeholder.png"
-                      }
-                      alt={item.name}
-                      className="w-20 h-20 object-cover rounded-md border"
-                    />
                     <div className="flex flex-col text-right">
                       <Link
                         to={`/product/${item.product}`}
@@ -167,6 +160,14 @@ function Order() {
                         تعداد: {formatNumber(item.quantity)}
                       </span>
                     </div>
+                    <img
+                      src={
+                        item.images[0] ||
+                        "https://ecommerce-v3.s3.ir-thr-at1.arvanstorage.ir/Defaults%2Fimage%20placeholder.png"
+                      }
+                      alt={item.name}
+                      className="w-20 h-20 object-cover rounded-md border"
+                    />
                   </div>
                   <p className="text-sm font-medium whitespace-nowrap">
                     {formatNumber(item.quantity * item.price)} تومان
@@ -177,26 +178,25 @@ function Order() {
           </div>
         </div>
 
-        {/* Right: Summary */}
         <div className="w-full lg:w-1/3">
-          <div className="card bg-base-100 shadow p-6 space-y-4">
+          <div className="card border p-6 space-y-4">
             <h2 className="text-lg font-bold text-right mb-2">خلاصه سفارش</h2>
-            <div className="text-right space-y-2 text-sm">
+            <div className="text-right space-y-4 text-sm">
               <div className="flex justify-between flex-row-reverse">
-                <span>محصولات:</span>
                 <span>{formatNumber(order.itemsPrice)} تومان</span>
+                <span>محصولات:</span>
               </div>
               <div className="flex justify-between flex-row-reverse">
-                <span>هزینه ارسال:</span>
                 <span>{formatNumber(order.shippingPrice)} تومان</span>
+                <span>هزینه ارسال:</span>
               </div>
               <div className="flex justify-between flex-row-reverse">
-                <span>مالیات:</span>
                 <span>{formatNumber(order.taxPrice)} تومان</span>
+                <span>مالیات:</span>
               </div>
               <div className="flex justify-between font-bold flex-row-reverse">
-                <span>جمع کل:</span>
                 <span>{formatNumber(order.totalPrice)} تومان</span>
+                <span>جمع کل:</span>
               </div>
             </div>
 
@@ -204,12 +204,9 @@ function Order() {
             {!order.isPaid && (
               <div className="mt-4">
                 {loadingPay && <Loader />}
-                <button
-                  className="btn btn-primary w-full"
-                  onClick={onApproveTest}
-                >
+                <Button onClick={onApproveTest} wfull>
                   تست پرداخت
-                </button>
+                </Button>
               </div>
             )}
 

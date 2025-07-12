@@ -76,10 +76,7 @@ const AddressDashboard = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {addresses.map((addr, index) => (
-            <div
-              key={index}
-              className="card bg-base-100 shadow-md border border-base-300"
-            >
+            <div key={index} className="card border border-border">
               <div className="card-body">
                 <p>
                   <span className="font-semibold">عنوان آدرس:</span>{" "}
@@ -117,7 +114,7 @@ const AddressDashboard = () => {
         readOnly
       />
       <div className={`modal ${modalOpen ? "modal-open" : ""}`}>
-        <div className="modal-box">
+        <div className="modal-box bg-background">
           <h3 className="font-bold text-lg mb-4">
             {editIndex !== null ? "ویرایش آدرس" : "افزودن آدرس جدید"}
           </h3>
@@ -143,7 +140,7 @@ const AddressDashboard = () => {
                   name={field}
                   value={formData[field]}
                   onChange={handleChange}
-                  className={`input input-bordered ${
+                  className={`input bg-background border border-border ${
                     field === "address" && "h-24 p-3"
                   }`}
                   disabled={isLoading}
@@ -153,7 +150,7 @@ const AddressDashboard = () => {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className="textarea textarea-bordered h-24 p-3 resize-none break-words whitespace-pre-wrap"
+                  className="textarea textarea-bordered h-24 p-3 resize-none break-words whitespace-pre-wrap bg-background border border-border"
                 />
               )}
             </div>

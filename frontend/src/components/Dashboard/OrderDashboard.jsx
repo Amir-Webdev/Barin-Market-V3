@@ -5,6 +5,8 @@ import Loader from "../UI/Loader";
 import Message from "../UI/Message";
 import Button from "../UI/Button";
 import { FaTimes } from "react-icons/fa";
+import { toPersianDate } from "../../utils/toPersianDate";
+import { formatNumber } from "../../utils/toPersianDigits";
 
 function OrderDashboard() {
   const navigate = useNavigate();
@@ -41,9 +43,9 @@ function OrderDashboard() {
             {getMyOrdersError?.data?.message || getMyOrdersError?.message}
           </Message>
         ) : (
-          <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
-              <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+          <div className="overflow-x-auto rounded-xl border border-border shadow-sm">
+            <table className="min-w-full divide-y divide-border text-sm">
+              <thead>
                 <tr>
                   <th className="px-4 py-3 text-right font-medium">کد سفارش</th>
                   <th className="px-4 py-3 text-right font-medium">تاریخ</th>
@@ -55,23 +57,20 @@ function OrderDashboard() {
                   <th className="px-4 py-3 text-right"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-800 bg-white dark:bg-base-200">
+              <tbody className="divide-y divide-gray-100">
                 {orders.map((order) => (
-                  <tr
-                    key={order._id}
-                    className="hover:bg-gray-50 dark:hover:bg-base-100"
-                  >
+                  <tr key={order._id} className="hover:bg-gray-50">
                     <td className="px-4 py-3">{order._id}</td>
                     <td className="px-4 py-3">
-                      {order.createdAt.substring(0, 10)}
+                      {toPersianDate(order.createdAt.substring(0, 10))}
                     </td>
                     <td className="px-4 py-3">
-                      {order.totalPrice.toLocaleString()} تومان
+                      {formatNumber(order.totalPrice)} تومان
                     </td>
                     <td className="px-4 py-3">
                       {order.isPaid ? (
                         <span className="text-green-600">
-                          {order.paidAt.substring(0, 10)}
+                          {toPersianDate(order.paidAt.substring(0, 10))}
                         </span>
                       ) : (
                         <FaTimes className="text-red-600" />

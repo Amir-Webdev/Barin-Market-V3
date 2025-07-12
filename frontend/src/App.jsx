@@ -22,6 +22,7 @@ import Fallback from "./components/Util/Fallback";
 import MobileNav from "./components/Mobile/MobileNav";
 import { useSelector } from "react-redux";
 import MobileMenu from "./components/Mobile/MobileMenu";
+import AppLayout from "./components/UI/AppLayout";
 
 // Lazily loaded pages
 const Cart = lazy(() => import("./pages/Cart"));
@@ -50,7 +51,6 @@ function App() {
     <>
       <BrowserRouter>
         <ScrollToTop />
-        <Header />
         <MobileNav setMobileMenuOpen={setMobileMenuOpen} userInfo={userInfo} />
         <MobileMenu
           mobileMenuOpen={mobileMenuOpen}
@@ -59,43 +59,47 @@ function App() {
         />
         <Suspense fallback={<Fallback />}>
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/verify-email" element={<EmailVerification />} />
-            <Route path="/forget-password" element={<ForgetPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/search/:keyword" element={<ProductSearchPage />} />
-            <Route path="/products" element={<Products />} />
-            <Route element={<PrivateRoute />}>
-              <Route path="/shipping" element={<Shipping />} />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/placeorder" element={<PlaceOrder />} />
-              <Route path="/order/:orderId" element={<Order />} />
-              <Route
-                path="/payment-success/:orderId"
-                element={<PaymentSuccess />}
-              />
-              <Route path="/profile" element={<Dashboard />} />
-              <Route path="/profile?tab" element={<Dashboard />} />
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/verify-email" element={<EmailVerification />} />
+              <Route path="/forget-password" element={<ForgetPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/search/:keyword" element={<ProductSearchPage />} />
+              <Route path="/products" element={<Products />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/shipping" element={<Shipping />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/placeorder" element={<PlaceOrder />} />
+                <Route path="/order/:orderId" element={<Order />} />
+                <Route
+                  path="/payment-success/:orderId"
+                  element={<PaymentSuccess />}
+                />
+                <Route path="/profile" element={<Dashboard />} />
+                <Route path="/profile?tab" element={<Dashboard />} />
+              </Route>
+              <Route element={<AdminRoute />}>
+                <Route path="/admin/orderlist" element={<OrderList />} />
+                <Route path="/admin/productlist" element={<ProductList />} />
+                <Route
+                  path="/admin/productlist/:pageNumber"
+                  element={<ProductList />}
+                />
+                <Route
+                  path="/admin/product/:id/edit"
+                  element={<ProductEdit />}
+                />
+                <Route path="/admin/userlist" element={<UserList />} />
+                <Route path="/admin/user/:id/edit" element={<UserEdit />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
             </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/admin/orderlist" element={<OrderList />} />
-              <Route path="/admin/productlist" element={<ProductList />} />
-              <Route
-                path="/admin/productlist/:pageNumber"
-                element={<ProductList />}
-              />
-              <Route path="/admin/product/:id/edit" element={<ProductEdit />} />
-              <Route path="/admin/userlist" element={<UserList />} />
-              <Route path="/admin/user/:id/edit" element={<UserEdit />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
-        <Footer />
       </BrowserRouter>
       <ToastContainer
         rtl

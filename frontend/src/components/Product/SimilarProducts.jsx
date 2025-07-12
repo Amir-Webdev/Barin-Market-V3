@@ -18,7 +18,7 @@ function SimilarProducts({ product }) {
 
   return (
     similarProducts.length > 0 && (
-      <div className="mt-12 bg-base-100 rounded-box border p-6">
+      <div className="mt-12 bg-background rounded-box border p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold">محصولات مشابه</h2>
           <Link

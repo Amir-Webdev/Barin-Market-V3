@@ -7,6 +7,7 @@ import {
 } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toPersianDigits } from "../../utils/toPersianDigits";
 
 function MobileNav({ setMobileMenuOpen, userInfo }) {
   const { cartItems } = useSelector((state) => state.cart);
@@ -37,7 +38,7 @@ function MobileNav({ setMobileMenuOpen, userInfo }) {
         <HiOutlineShoppingCart className="h-5 w-5" />
         {cartItemCount > 0 && (
           <span className="absolute -top-2 right-3 px-[6px] pt-[2px] rounded-full bg-primary text-[10px] text-white text-center">
-            {cartItemCount}
+            {toPersianDigits(cartItemCount)}
           </span>
         )}
         سبد خرید

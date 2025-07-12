@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingAddress } from "../store/slices/cart/cartSlice";
-import CheckoutSteps from "../components/CheckoutSteps";
+import CheckoutSteps from "../components/Order/CheckoutSteps.jsx";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
+import Button from "../components/UI/Button.jsx";
 
 function Shipping() {
   const cart = useSelector((state) => state.cart);
@@ -45,42 +46,58 @@ function Shipping() {
         }}
       />
 
-      <div className="max-w-xl mx-auto px-4 py-6">
+      <div className="max-w-xl mx-auto my-4 px-4 py-6">
         <CheckoutSteps step={2} />
 
-        <h1 className="text-2xl font-bold text-center mb-6">اطلاعات ارسال</h1>
+        <h1 className="text-2xl font-bold text-center mb-12">اطلاعات ارسال</h1>
 
-        <form onSubmit={submitHandler} className="space-y-4">
-          {["address", "city", "postalCode"].map((field) => (
-            <div key={field} className="flex flex-col text-right">
-              <label htmlFor={field} className="mb-1 font-medium">
-                {field === "address"
-                  ? "آدرس:"
-                  : field === "city"
-                  ? "شهر:"
-                  : "کد پستی:"}
-              </label>
-              <input
-                type="text"
-                id={field}
-                placeholder={`${
-                  field === "address"
-                    ? "آدرس را وارد کنید"
-                    : field === "city"
-                    ? "شهر را وارد کنید"
-                    : "کد پستی را وارد کنید"
-                }`}
-                value={shippingAddressForm[field]}
-                onChange={handleChange}
-                className="input input-bordered"
-                required
-              />
-            </div>
-          ))}
+        <form onSubmit={submitHandler}>
+          <div className="grid grid-cols-[6rem_1fr] items-center justify-items-center gap-6">
+            <label htmlFor="address" className="font-medium">
+              آدرس:
+            </label>
+            <input
+              type="text"
+              id="address"
+              placeholder="آدرس را وارد کنید"
+              value={shippingAddressForm.address}
+              onChange={handleChange}
+              className="input input-bordered"
+              required
+            />
 
-          <button type="submit" className="btn btn-primary w-full mt-4">
-            ادامه
-          </button>
+            <label htmlFor="city" className="font-medium">
+              شهر:
+            </label>
+            <input
+              type="text"
+              id="city"
+              placeholder="شهر را وارد کنید"
+              value={shippingAddressForm.city}
+              onChange={handleChange}
+              className="input input-bordered"
+              required
+            />
+
+            <label htmlFor="postalCode" className="font-medium">
+              کد پستی:
+            </label>
+            <input
+              type="text"
+              id="postalCode"
+              placeholder="کد پستی را وارد کنید"
+              value={shippingAddressForm.postalCode}
+              onChange={handleChange}
+              className="input input-bordered"
+              required
+            />
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <Button type="submit" size="lg">
+              ادامه
+            </Button>
+          </div>
         </form>
       </div>
     </>

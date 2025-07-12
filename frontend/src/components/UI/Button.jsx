@@ -4,16 +4,17 @@ function Button({
   isLoading,
   size = "md",
   wfull,
+  outline = true,
   ...otherProps
 }) {
   return (
     <button
-      className={`btn rounded-lg btn-${size} btn-outline ${
+      className={`btn rounded-lg btn-${size} btn-${outline && "outline"} ${
         color === "red"
           ? "btn-error hover:bg-[rgb(228,64,64)"
           : color === "green"
-          ? "bg-success hover:bg-[rgb(30,200,129)]"
-          : "bg-primary hover:bg-primary-dark text-white"
+          ? "btn-success"
+          : "btn-info hover:bg-primary-dark"
       } ${wfull && "w-full"}`}
       disabled={isLoading}
       {...otherProps}

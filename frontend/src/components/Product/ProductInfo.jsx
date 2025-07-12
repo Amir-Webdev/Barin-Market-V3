@@ -42,6 +42,7 @@ function ProductInfo({ product, productId }) {
       toast.error(
         "اضافه کردن به لیست علاقه مندی ها با شکست مواجه شد. مجددا تلاش کنید."
       );
+      setWishlist(false);
     }
   }
 
@@ -56,10 +57,11 @@ function ProductInfo({ product, productId }) {
         productId: product._id,
       }).unwrap();
       setWishlist(false);
-    } catch (error) {
+    } catch (err) {
       toast.error(
         "حذف کردن از لیست علاقه مندی ها با شکست مواجه شد. مجددا تلاش کنید."
       );
+      setWishlist(true);
     }
   }
 
@@ -128,7 +130,9 @@ function ProductInfo({ product, productId }) {
               (wishlist ? handleRemoveLikeProduct() : handleLikeProduct())
             }
             disabled={isAddingLike || isRemovingLike}
-            className={`btn btn-circle btn-md ${wishlist ? "btn-error" : ""}`}
+            className={`btn btn-circle btn-md btn-error ${
+              !wishlist && "btn-outline"
+            }`}
             aria-label={
               wishlist ? "حذف از علاقه‌مندی‌ها" : "افزودن به علاقه‌مندی‌ها"
             }
