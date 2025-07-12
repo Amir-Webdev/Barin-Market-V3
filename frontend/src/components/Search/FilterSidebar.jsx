@@ -1,5 +1,3 @@
-// FilterSidebar.jsx
-import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useGetProductFiltersQuery } from "../../store/slices/api/productApiSlice";
 import { FaFilter, FaTimes, FaStar } from "react-icons/fa";
@@ -205,18 +203,6 @@ const FilterSidebar = ({ filters, setFilters, mobileOpen, setMobileOpen }) => {
       </div>
     </div>
   );
-};
-
-FilterSidebar.propTypes = {
-  filters: PropTypes.object.isRequired,
-  setFilters: PropTypes.func.isRequired,
-  mobileOpen: PropTypes.bool,
-  setMobileOpen: PropTypes.func,
-};
-
-FilterSidebar.defaultProps = {
-  mobileOpen: false,
-  setMobileOpen: () => {},
 };
 
 export default FilterSidebar;

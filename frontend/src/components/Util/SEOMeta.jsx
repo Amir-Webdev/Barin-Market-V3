@@ -1,6 +1,4 @@
-// src/components/Util/SEOMeta.jsx
 import { useEffect } from "react";
-import PropTypes from "prop-types";
 
 /**
  * A component to manage SEO meta tags dynamically in a Vite + React 19 app
@@ -70,18 +68,5 @@ function SEOMeta({ title, description, keywords, canonical, openGraph = {} }) {
 
   return null; // This component doesn't render anything
 }
-
-SEOMeta.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  keywords: PropTypes.string,
-  canonical: PropTypes.string,
-  openGraph: PropTypes.shape({
-    title: PropTypes.string,
-    description: PropTypes.string,
-    image: PropTypes.string,
-    url: PropTypes.string,
-  }),
-};
 
 export default SEOMeta;

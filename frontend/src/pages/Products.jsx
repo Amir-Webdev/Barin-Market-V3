@@ -1,7 +1,4 @@
-// ProductsPage.jsx
-import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useGetProductsQuery } from "../store/slices/api/productApiSlice";
 import ProductCard from "../components/Product/ProductCard";
 import Paginate from "../components/UI/Paginate";
@@ -11,7 +8,7 @@ import { FaFilter } from "react-icons/fa";
 import SEOMeta from "../components/Util/SEOMeta";
 import Message from "../components/UI/Message";
 import NoResults from "../components/UI/NoResults";
-import { formatNumber, toPersianDigits } from "../utils/toPersianDigits";
+import { formatNumber } from "../utils/toPersianDigits";
 
 const Products = () => {
   const [page, setPage] = useState(1);
