@@ -16,11 +16,14 @@ import { useEffect, useMemo, useState } from "react";
 
 function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const pageNumber = parseInt(searchParams.get("page") || "1");
+
   const [search, setSearch] = useState(searchParams.get("keyword") || "");
   const [sortColumn, setSortColumn] = useState("name");
   const [sortAsc, setSortAsc] = useState(true);
+
+  const navigate = useNavigate();
+
+  const pageNumber = parseInt(searchParams.get("page") || "1");
 
   const {
     data: productsData,
@@ -222,7 +225,11 @@ function ProductList() {
             <Paginate
               pages={productsData.pages}
               page={pageNumber}
-              setPage={(p) => setSearchParams({ page: p })}
+              setPage={(p) => {
+                const params = new URLSearchParams(searchParams);
+                params.set("page", p);
+                setSearchParams(params);
+              }}
             />
           )}
         </>

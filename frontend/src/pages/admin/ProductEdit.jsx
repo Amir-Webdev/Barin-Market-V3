@@ -8,8 +8,9 @@ import {
   useDeleteProductImagesMutation,
 } from "../../store/slices/api/productApiSlice";
 import Loader from "../../components/UI/Loader";
-import Message from "../../components/Message";
-import SEOMeta from "../../components/SEOMeta";
+import Message from "../../components/UI/Message";
+import SEOMeta from "../../components/Util/SEOMeta";
+import Button from "../../components/UI/Button";
 
 function ProductEdit() {
   const { id: productId } = useParams();
@@ -190,177 +191,176 @@ function ProductEdit() {
         }}
       />
 
-      <div className="flex justify-end mb-4">
-        <Link to="/admin/productlist" className="btn btn-outline btn-sm">
+      <div className="container mx-auto p-4 space-y-6 mb-auto">
+        <Link className="btn" to="/admin/productlist">
           بازگشت
         </Link>
-      </div>
+        <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
+          <h1 className="text-xl font-bold mb-6 text-right">ویرایش محصول</h1>
 
-      <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6 rtl">
-        <h1 className="text-xl font-bold mb-6 text-right">ویرایش محصول</h1>
+          {(isUpdating || isUploading || isDeleting) && <Loader />}
 
-        {(isUpdating || isUploading || isDeleting) && <Loader />}
+          {[getProductError, updateError, imageUploadError].map(
+            (err, i) =>
+              err && (
+                <Message key={i} type="danger">
+                  {err?.data?.message || err.message}
+                </Message>
+              )
+          )}
 
-        {[getProductError, updateError, imageUploadError].map(
-          (err, i) =>
-            err && (
-              <Message key={i} type="danger">
-                {err?.data?.message || err.message}
-              </Message>
-            )
-        )}
+          {isLoadingProduct ? (
+            <Loader />
+          ) : (
+            <form onSubmit={submitHandler} className="space-y-4">
+              {[
+                { id: "name", label: "نام", type: "text", required: true },
+                { id: "price", label: "قیمت", type: "number", required: true },
+                { id: "brand", label: "برند", type: "text" },
+                { id: "countInStock", label: "موجودی", type: "number" },
+              ].map(({ id, label, type, required }) => (
+                <div className="form-control" key={id}>
+                  <label htmlFor={id} className="label justify-end">
+                    <span className="label-text">
+                      {label}
+                      {required && <span className="text-red-500 mr-1">*</span>}
+                    </span>
+                  </label>
+                  <input
+                    id={id}
+                    type={type}
+                    className={`input input-bordered input-sm w-full ${
+                      errors[id] ? "input-error" : ""
+                    }`}
+                    value={product[id]}
+                    onChange={handleChange}
+                    placeholder={`${label} را وارد کنید`}
+                  />
+                  {errors[id] && touched[id] && (
+                    <span className="text-red-500 text-xs mt-1">
+                      {errors[id]}
+                    </span>
+                  )}
+                </div>
+              ))}
 
-        {isLoadingProduct ? (
-          <Loader />
-        ) : (
-          <form onSubmit={submitHandler} className="space-y-4">
-            {[
-              { id: "name", label: "نام", type: "text", required: true },
-              { id: "price", label: "قیمت", type: "number", required: true },
-              { id: "brand", label: "برند", type: "text" },
-              { id: "countInStock", label: "موجودی", type: "number" },
-            ].map(({ id, label, type, required }) => (
-              <div className="form-control" key={id}>
-                <label htmlFor={id} className="label justify-end">
-                  <span className="label-text">
-                    {label}
-                    {required && <span className="text-red-500 mr-1">*</span>}
-                  </span>
+              <div className="form-control">
+                <label htmlFor="description" className="label justify-end">
+                  <span className="label-text">توضیحات</span>
                 </label>
-                <input
-                  id={id}
-                  type={type}
-                  className={`input input-bordered input-sm w-full ${
-                    errors[id] ? "input-error" : ""
-                  }`}
-                  value={product[id]}
+                <textarea
+                  id="description"
+                  className="textarea textarea-bordered w-full"
+                  value={product.description}
                   onChange={handleChange}
-                  placeholder={`${label} را وارد کنید`}
+                  placeholder="توضیحات محصول را وارد کنید"
+                  rows={3}
                 />
-                {errors[id] && touched[id] && (
-                  <span className="text-red-500 text-xs mt-1">
-                    {errors[id]}
-                  </span>
-                )}
               </div>
-            ))}
 
-            <div className="form-control">
-              <label htmlFor="description" className="label justify-end">
-                <span className="label-text">توضیحات</span>
-              </label>
-              <textarea
-                id="description"
-                className="textarea textarea-bordered w-full"
-                value={product.description}
-                onChange={handleChange}
-                placeholder="توضیحات محصول را وارد کنید"
-                rows={3}
-              />
-            </div>
-
-            <div className="form-control">
-              <label htmlFor="category" className="label justify-end">
-                <span className="label-text">دسته‌بندی</span>
-              </label>
-              <select
-                id="category"
-                className={`select select-bordered w-full ${
-                  errors.category ? "select-error" : ""
-                }`}
-                value={product.category}
-                onChange={handleChange}
-              >
-                <option value="">انتخاب کنید</option>
-                <option value="electronics">الکترونیک</option>
-                <option value="clothing">پوشاک</option>
-                <option value="home">مبلمان و لوازم خانگی</option>
-              </select>
-              {errors.category && touched.category && (
-                <span className="text-red-500 text-xs mt-1">
-                  {errors.category}
-                </span>
-              )}
-            </div>
-
-            <div className="form-control">
-              <label className="label justify-end">
-                <span className="label-text">تصاویر محصول</span>
-                {errors.images && (
-                  <span className="text-red-500 text-xs">{errors.images}</span>
-                )}
-              </label>
-
-              {product.images.length > 0 ? (
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  {product.images.map((img, index) => (
-                    <div key={index} className="relative group">
-                      <img
-                        src={img}
-                        alt={`Product ${index + 1}`}
-                        className={`rounded-lg h-24 w-full object-cover ${
-                          index === 0 ? "ring-2 ring-primary" : ""
-                        }`}
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-all">
-                        <button
-                          type="button"
-                          aria-label="Set as main image"
-                          onClick={() => setAsMainImage(img)}
-                          className="btn btn-xs btn-primary"
-                          disabled={index === 0}
-                        >
-                          {index === 0 ? "اصلی" : "انتخاب اصلی"}
-                        </button>
-                        <button
-                          type="button"
-                          aria-label="Delete image"
-                          onClick={() => deleteImageHandler(img)}
-                          className="btn btn-xs btn-error"
-                          disabled={isDeleting}
-                        >
-                          حذف
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-4 text-gray-500">
-                  تصویری وجود ندارد
-                </div>
-              )}
-
-              <div className="mt-4">
-                <label htmlFor="imageUpload" className="label justify-end">
-                  <span className="label-text">افزودن تصاویر جدید</span>
+              <div className="form-control">
+                <label htmlFor="category" className="label justify-end">
+                  <span className="label-text">دسته‌بندی</span>
                 </label>
-                <input
-                  id="imageUpload"
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  className="file-input file-input-bordered file-input-sm w-full"
-                  onChange={uploadImageHandler}
-                  disabled={isUploading}
-                />
-                {isUploading && (
-                  <span className="text-sm text-gray-500 mt-1 block">
-                    در حال آپلود تصاویر...
+                <select
+                  id="category"
+                  className={`select select-bordered w-full ${
+                    errors.category ? "select-error" : ""
+                  }`}
+                  value={product.category}
+                  onChange={handleChange}
+                >
+                  <option value="">انتخاب کنید</option>
+                  <option value="electronics">الکترونیک</option>
+                  <option value="clothing">پوشاک</option>
+                  <option value="home">مبلمان و لوازم خانگی</option>
+                </select>
+                {errors.category && touched.category && (
+                  <span className="text-red-500 text-xs mt-1">
+                    {errors.category}
                   </span>
                 )}
               </div>
-            </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary btn-sm w-full mt-4"
-              disabled={isUpdating}
-            >
-              {isUpdating ? "در حال به‌روزرسانی..." : "به‌روزرسانی محصول"}
-            </button>
-          </form>
-        )}
+              <div className="form-control">
+                <label className="label justify-end">
+                  <span className="label-text">تصاویر محصول</span>
+                  {errors.images && (
+                    <span className="text-red-500 text-xs">
+                      {errors.images}
+                    </span>
+                  )}
+                </label>
+
+                {product.images.length > 0 ? (
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {product.images.map((img, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={img}
+                          alt={`Product ${index + 1}`}
+                          className={`rounded-lg h-24 w-full object-cover ${
+                            index === 0 ? "ring-2 ring-primary" : ""
+                          }`}
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-all">
+                          <button
+                            type="button"
+                            aria-label="Set as main image"
+                            onClick={() => setAsMainImage(img)}
+                            className="btn btn-xs btn-primary"
+                            disabled={index === 0}
+                          >
+                            {index === 0 ? "اصلی" : "انتخاب اصلی"}
+                          </button>
+                          <button
+                            type="button"
+                            aria-label="Delete image"
+                            onClick={() => deleteImageHandler(img)}
+                            className="btn btn-xs btn-error"
+                            disabled={isDeleting}
+                          >
+                            حذف
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-4 text-gray-500">
+                    تصویری وجود ندارد
+                  </div>
+                )}
+
+                <div className="mt-4">
+                  <label htmlFor="imageUpload" className="label justify-end">
+                    <span className="label-text">افزودن تصاویر جدید</span>
+                  </label>
+                  <input
+                    id="imageUpload"
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    className="file-input file-input-bordered file-input-sm w-full"
+                    onChange={uploadImageHandler}
+                    disabled={isUploading}
+                  />
+                  {isUploading && (
+                    <span className="text-sm text-gray-500 mt-1 block">
+                      در حال آپلود تصاویر...
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <Button type="submit" disabled={isUpdating}>
+                  {isUpdating ? "در حال به‌روزرسانی..." : "به‌روزرسانی محصول"}
+                </Button>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </>
   );

@@ -8,6 +8,9 @@ import CommentDashboard from "../components/Dashboard/CommentDashboard";
 import ContactSupportDashboard from "../components/Dashboard/ContactSupportDashboard";
 import ProfileDashboard from "../components/Dashboard/ProfileDashboard";
 import { useSelector } from "react-redux";
+import OrderList from "./admin/OrderList";
+import ProductList from "./admin/ProductList";
+import UserList from "./admin/UserList";
 
 function Dashboard() {
   const location = useLocation();
@@ -27,7 +30,7 @@ function Dashboard() {
     <div className="min-h-screen flex flex-col md:flex-row md:justify-start">
       {/* SideBar */}
       <div className="md:w-56">
-        <DashboardSidebar />
+        <DashboardSidebar userInfo={userInfo} />
       </div>
       {tab === "profile" && <ProfileDashboard userInfo={userInfo} />}
       {tab === "address" && <AddressDashboard />}
@@ -35,6 +38,9 @@ function Dashboard() {
       {tab === "wishlist" && <WishlistDashboard userId={userId} />}
       {tab === "comments" && <CommentDashboard userId={userId} />}
       {tab === "support" && <ContactSupportDashboard />}
+      {tab === "productlist" && <ProductList />}
+      {tab === "orderlist" && <OrderList />}
+      {tab === "userlist" && <UserList />}
       {!tab && <div>لطفا یکی از داشبورد ها را انتخاب کنید</div>}
     </div>
   );

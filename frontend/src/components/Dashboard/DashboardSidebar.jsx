@@ -20,7 +20,7 @@ import { useLogoutMutation } from "../../store/slices/api/userApiSlice";
 import { resetCart } from "../../store/slices/cart/cartSlice";
 import { toast } from "react-toastify";
 
-function DashboardSidebar() {
+function DashboardSidebar({ userInfo }) {
   const [tab, setTab] = useState("");
   const location = useLocation();
 
@@ -133,6 +133,51 @@ function DashboardSidebar() {
             خروج از حساب
           </button>
         </li>
+
+        {userInfo.isAdmin && (
+          <>
+            <div className="divider"></div>
+
+            <li>
+              <Link to="/admin/productlist">
+                <div
+                  className={`flex items-center gap-2 ${
+                    tab === "support" ? "active" : ""
+                  }`}
+                >
+                  <HiOutlineSupport />
+                  لیست محصولات
+                </div>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/admin/orderlist">
+                <div
+                  className={`flex items-center gap-2 ${
+                    tab === "support" ? "active" : ""
+                  }`}
+                >
+                  <HiOutlineSupport />
+                  لیست سفارشات
+                </div>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/admin/userlist">
+                <div
+                  className={`flex items-center gap-2 ${
+                    tab === "support" ? "active" : ""
+                  }`}
+                >
+                  <HiOutlineSupport />
+                  لیست کاربران
+                </div>
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );

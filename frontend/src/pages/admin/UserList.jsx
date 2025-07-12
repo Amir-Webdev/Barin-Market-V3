@@ -1,15 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   useDeleteUserMutation,
   useGetUsersQuery,
 } from "../../store/slices/api/userApiSlice";
 import Loader from "../../components/UI/Loader";
-import Message from "../../components/Message";
+import Message from "../../components/UI/Message";
 import { FaCheck, FaEdit, FaTimes, FaTrash } from "react-icons/fa";
-import SEOMeta from "../../components/SEOMeta";
-import Paginate from "../../components/Paginate";
-import { toPersianDigits } from "../../utils/toPersianDigits";
+import SEOMeta from "../../components/Util/SEOMeta";
+import Paginate from "../../components/UI/Paginate";
 import { toast } from "react-toastify";
 
 function UserList() {
@@ -79,7 +78,7 @@ function UserList() {
         canonical={window.location.href}
       />
 
-      <div className="flex flex-col mt-6 mb-auto">
+      <div className="container mx-auto px-4 py-8 mb-auto">
         <div className="mb-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <h1 className="text-xl font-bold">کاربران</h1>
           <input

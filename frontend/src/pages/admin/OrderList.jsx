@@ -1,9 +1,9 @@
 import { useGetOrdersQuery } from "../../store/slices/api/orderApiSlice";
 import { FaTimes, FaCheck, FaInfoCircle, FaSyncAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../components/UI/Loader";
-import Message from "../../components/Message";
-import SEOMeta from "../../components/SEOMeta";
+import Message from "../../components/UI/Message";
+import SEOMeta from "../../components/Util/SEOMeta";
 import { formatNumber } from "../../utils/toPersianDigits";
 import { toPersianDate } from "../../utils/toPersianDate";
 
@@ -33,6 +33,9 @@ const STATUS_CONFIG = {
 function OrderList() {
   const { data: orders, isLoading, error, refetch } = useGetOrdersQuery();
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageNumber = parseInt(searchParams.get("page") || "1");
 
   if (isLoading) return <Loader fullScreen />;
 
@@ -154,6 +157,18 @@ function OrderList() {
             </table>
           </div>
         </div>
+
+        {orders?.pages > 1 && (
+          <Paginate
+            pages={orders.pages}
+            page={pageNumber}
+            setPage={(p) => {
+              const params = new URLSearchParams(searchParams);
+              params.set("page", p);
+              setSearchParams(params);
+            }}
+          />
+        )}
       </div>
     </div>
   );

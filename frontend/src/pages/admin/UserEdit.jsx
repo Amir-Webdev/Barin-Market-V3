@@ -6,8 +6,9 @@ import {
 } from "../../store/slices/api/userApiSlice";
 import { useEffect, useState } from "react";
 import Loader from "../../components/UI/Loader";
-import Message from "../../components/Message";
+import Message from "../../components/UI/Message";
 import SEOMeta from "../../components/Util/SEOMeta.jsx";
+import Button from "../../components/UI/Button.jsx";
 
 function UserEdit() {
   const { id: userId } = useParams();
@@ -84,7 +85,7 @@ function UserEdit() {
           <Message type="error">{getUserError}</Message>
         ) : (
           <form onSubmit={submitHandler} className="space-y-4">
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label htmlFor="name" className="label">
                 <span className="label-text">نام</span>
               </label>
@@ -98,7 +99,7 @@ function UserEdit() {
               />
             </div>
 
-            <div className="form-control">
+            <div className="form-control flex flex-col">
               <label htmlFor="email" className="label">
                 <span className="label-text">ایمیل</span>
               </label>
@@ -127,9 +128,7 @@ function UserEdit() {
               </label>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full mt-4">
-              ذخیره تغییرات
-            </button>
+            <Button type="submit">ذخیره تغییرات</Button>
           </form>
         )}
       </div>
