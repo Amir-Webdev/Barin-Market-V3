@@ -7,8 +7,8 @@ import { useUpdateProfileMutation } from "../store/slices/api/userApiSlice";
 import { useGetMyOrdersQuery } from "../store/slices/api/orderApiSlice";
 import { setCredentials } from "../store/slices/auth/authSlice";
 import Loader from "../components/UI/Loader";
-import Message from "../components/Message";
-import SEOMeta from "../components/SEOMeta";
+import Message from "../components/UI/Message";
+import SEOMeta from "../components/Util/SEOMeta";
 
 function Profile() {
   const [formData, setFormData] = useState({
