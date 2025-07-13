@@ -8,6 +8,7 @@ import Loader from "../components/UI/Loader";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
 import Button from "../components/UI/Button.jsx";
 import Logo from "../components/UI/Logo.jsx";
+import { HiOutlineArrowLeft } from "react-icons/hi";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -73,7 +74,7 @@ function Login() {
                 id="email"
                 type="email"
                 placeholder="example@example.com"
-                className="input border border-border bg-background"
+                className="input border border-border bg-background w-full"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -89,14 +90,14 @@ function Login() {
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className="input border border-border bg-background"
+                className="input border border-border bg-background w-full"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
 
-            <Button type="submit" disabled={isLoading} wfull outline={false}>
+            <Button type="submit" disabled={isLoading} wfull>
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   در حال ورود...
@@ -108,24 +109,34 @@ function Login() {
             </Button>
           </form>
 
-          <div className="mt-6 text-sm text-gray-600 space-y-2 text-center">
-            <div>
-              <Link
-                to="/forget-password"
-                className="text-primary hover:underline"
-              >
-                فراموشی رمز عبور
-              </Link>
+          <div className="mt-6 text-sm flex justify-between items-center space-y-2 ">
+            <div className="space-y-2">
+              <div>
+                <Link
+                  to="/forget-password"
+                  className="text-primary hover:underline"
+                >
+                  فراموشی رمز عبور
+                </Link>
+              </div>
+              <div>
+                <span>کاربر جدید هستید؟ </span>
+                <Link
+                  to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                  className="text-primary hover:underline"
+                >
+                  ثبت نام کنید
+                </Link>
+              </div>
             </div>
-            <div>
-              <span>کاربر جدید هستید؟ </span>
-              <Link
-                to={redirect ? `/register?redirect=${redirect}` : "/register"}
-                className="text-primary hover:underline"
-              >
-                ثبت نام کنید
-              </Link>
-            </div>
+            <Link to="/">
+              <Button>
+                <div className="flex items-center gap-1">
+                  <HiOutlineArrowLeft />
+                  خانه
+                </div>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

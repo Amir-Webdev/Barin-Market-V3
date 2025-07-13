@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../store/slices/api/userApiSlice";
-import { setCredentials } from "../store/slices/auth/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/UI/Loader";
 import SEOMeta from "../components/Util/SEOMeta";
 import Logo from "../components/UI/Logo";
 import Button from "../components/UI/Button";
+import { HiOutlineArrowLeft } from "react-icons/hi";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -17,7 +17,6 @@ function Register() {
   });
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
@@ -88,7 +87,7 @@ function Register() {
                 id="name"
                 type="text"
                 placeholder="نام و نام خانوادگی"
-                className="input bg-background border border-border"
+                className="input bg-background border border-border w-full"
                 value={formData.name}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -107,7 +106,7 @@ function Register() {
                 id="email"
                 type="email"
                 placeholder="example@example.com"
-                className="input bg-background border border-border"
+                className="input bg-background border border-border w-full"
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -125,7 +124,7 @@ function Register() {
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className="input bg-background border border-border"
+                className="input bg-background border border-border w-full"
                 value={formData.password}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -143,7 +142,7 @@ function Register() {
                 id="confirmPassword"
                 type="password"
                 placeholder="••••••••"
-                className="input bg-background border border-border"
+                className="input bg-background border border-border w-full"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 disabled={isLoading}
@@ -162,13 +161,23 @@ function Register() {
             </Button>
           </form>
 
-          <div className="mt-6 text-center text-sm">
-            <span className="text-gray-600">قبلاً ثبت نام کردید؟ </span>
-            <Link
-              to={redirect ? `/login?redirect=${redirect}` : "/login"}
-              className="text-primary hover:text-primary-dark font-medium transition"
-            >
-              وارد شوید
+          <div className="mt-6 flex items-center justify-between text-sm">
+            <div>
+              <span className="text-gray-600">قبلاً ثبت نام کردید؟ </span>
+              <Link
+                to={redirect ? `/login?redirect=${redirect}` : "/login"}
+                className="text-primary hover:text-primary-dark font-medium transition"
+              >
+                وارد شوید
+              </Link>
+            </div>
+            <Link to="/">
+              <Button>
+                <div className="flex items-center gap-1">
+                  <HiOutlineArrowLeft />
+                  خانه
+                </div>
+              </Button>
             </Link>
           </div>
         </div>
