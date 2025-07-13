@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { formatNumber, toPersianDigits } from "../../utils/toPersianDigits";
 import Rating from "./Rating";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import useAddToCart from "../../hooks/useAddToCart";
 import Button from "../UI/Button";
 import { useSelector } from "react-redux";
@@ -12,20 +12,15 @@ import {
 } from "../../store/slices/api/productApiSlice";
 import { HiOutlineHeart } from "react-icons/hi2";
 
-function ProductInfo({ product, productId }) {
+function ProductInfo({ product }) {
   const [wishlist, setWishlist] = useState(false);
-  const [quantity, setQuantity] = useState(1);
   const [showInfo, setShowInfo] = useState(false);
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    setQuantity(1);
-  }, [productId, product?.countInStock]);
-
   const addToCart = useAddToCart();
   function addToCartHandler() {
-    addToCart({ ...product, quantity });
+    addToCart(product, 1);
   }
 
   useEffect(() => {

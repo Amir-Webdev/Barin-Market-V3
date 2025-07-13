@@ -129,14 +129,12 @@ function Login() {
                 </Link>
               </div>
             </div>
-            <Link to="/">
-              <Button>
-                <div className="flex items-center gap-1">
-                  <HiOutlineArrowLeft />
-                  خانه
-                </div>
-              </Button>
-            </Link>
+            <Button onClick={() => navigate(-1)}>
+              <div className="flex items-center gap-1">
+                <HiOutlineArrowLeft />
+                بازگشت
+              </div>
+            </Button>
           </div>
         </div>
       </div>

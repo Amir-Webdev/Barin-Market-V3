@@ -33,7 +33,7 @@ function Order() {
 
   useEffect(() => {
     if (userInfo?.isAdmin && !isLoading) {
-      setOrderStatus(order.status);
+      setOrderStatus(order?.status);
     }
   }, [userInfo, order, isLoading]);
 
@@ -61,7 +61,7 @@ function Order() {
   if (isLoading) return <Loader />;
   if (error)
     return (
-      <Message type="error">
+      <Message type="danger">
         {error?.data?.message || error.error || "خطا در بارگذاری جزئیات سفارش"}
       </Message>
     );

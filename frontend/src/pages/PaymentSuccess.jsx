@@ -7,6 +7,8 @@ import { useGetOrderDetailsQuery } from "../store/slices/api/orderApiSlice";
 import Loader from "../components/UI/Loader";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
 import Button from "../components/UI/Button.jsx";
+import { toPersianDate } from "../utils/toPersianDate.js";
+import { formatNumber } from "../utils/toPersianDigits.js";
 
 const PaymentSuccess = () => {
   const { orderId } = useParams();
@@ -35,7 +37,7 @@ const PaymentSuccess = () => {
         dir="rtl"
       >
         <div className="w-full max-w-2xl">
-          <div className="card shadow-md bg-base-100">
+          <div className="card border border-border rounded-2xl">
             <div className="card-body text-center p-6">
               <div className="mb-4 h-[150px]">
                 <Lottie
@@ -46,32 +48,32 @@ const PaymentSuccess = () => {
               </div>
 
               <h2 className="text-2xl font-bold mb-2">پرداخت موفق!</h2>
-              <p className="text-gray-500 mb-6">
+              <p className=" mb-6">
                 با تشکر از خرید شما. سفارش شما ثبت شده و در حال پردازش است.
               </p>
 
               {/* Order Summary */}
-              <div className="bg-base-200 rounded-xl p-4 text-right mb-6">
+              <div className="rounded-xl p-4 text-right mb-6">
                 <h3 className="text-lg font-bold mb-3">خلاصه سفارش</h3>
 
                 <div className="flex justify-between mb-2">
-                  <span className="text-neutral">شماره سفارش:</span>
+                  <span>شماره سفارش:</span>
                   <span className="font-bold">{orderId}</span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-neutral">مبلغ پرداختی:</span>
+                  <span>مبلغ پرداختی:</span>
                   <span className="font-bold">
-                    {order.totalPrice.toLocaleString("fa-IR")} تومان
+                    {formatNumber(order.totalPrice)} تومان
                   </span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-neutral">تاریخ:</span>
+                  <span>تاریخ:</span>
                   <span className="font-bold">
-                    {new Date(order.paidAt).toLocaleDateString("fa-IR")}
+                    {toPersianDate(order.paidAt)}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-neutral">روش پرداخت:</span>
+                  <span>روش پرداخت:</span>
                   <span className="font-bold">
                     {order.paymentMethod === "ZarinPal"
                       ? "زرین‌پال"

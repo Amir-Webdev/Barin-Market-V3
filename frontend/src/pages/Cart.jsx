@@ -48,17 +48,13 @@ function Cart() {
       />
 
       <div className="container mx-auto px-4 py-8 min-h-screen">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-primary mb-6 hover:text-primary-dark transition-colors"
-        >
-          <FaArrowLeft />
-          <span>بازگشت</span>
-        </button>
-
-        <h1 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">
-          سبد خرید شما
-        </h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold">سبد خرید شما</h1>
+          <Button onClick={() => navigate(-1)}>
+            <FaArrowLeft />
+            <span>بازگشت</span>
+          </Button>
+        </div>
 
         {!cartItems.length ? (
           <div className="flex flex-col items-center justify-center py-12">

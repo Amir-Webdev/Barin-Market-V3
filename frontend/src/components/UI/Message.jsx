@@ -18,10 +18,6 @@ const typeMap = {
     color: "error",
     icon: <MdOutlineError className="w-5 h-5" />,
   },
-  warning: {
-    color: "warning",
-    icon: <IoWarningOutline className="w-5 h-5" />,
-  },
 };
 
 function Message({ type = "info", children, title, dismissible = false }) {
