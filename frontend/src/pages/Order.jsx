@@ -50,7 +50,7 @@ function Order() {
   async function updateStatusHandler(e) {
     try {
       setOrderStatus(e.target.value);
-      await updateOrderStatus({ orderId, status: e.target.value });
+      await updateOrderStatus({ orderId, status: e.target.value }).unwrap();
       refetch();
       toast.success("وضعیت سفارش با موفقیت به‌روزرسانی شد");
     } catch (error) {
