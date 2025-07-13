@@ -11,7 +11,6 @@ import SimilarProducts from "../components/Product/SimilarProducts.jsx";
 import ProductInfo from "../components/Product/ProductInfo.jsx";
 import Breadcrumb from "../components/UI/Breadcrumb.jsx";
 import ProductImages from "../components/Product/ProductImages.jsx";
-import FullScreenProductImage from "../components/Product/FullScreenProductImage.jsx";
 
 function ProductPage() {
   const { id: productId } = useParams();
@@ -92,15 +91,6 @@ function ProductPage() {
           images: product.image ? [{ url: product.image }] : [],
         }}
       />
-
-      {/* Fullscreen Image Viewer */}
-      {fullscreenImage && (
-        <FullScreenProductImage
-          fullscreenImage={fullscreenImage}
-          setFullscreenImage={setFullscreenImage}
-          imageGallery={imageGallery}
-        />
-      )}
 
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
