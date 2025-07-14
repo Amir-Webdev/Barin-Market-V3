@@ -89,7 +89,7 @@ function ReviewCard({ review, userId, refetchReviews, isLoadingReviews }) {
             ویرایش
           </Button>
           <dialog id="editReviewFormModal" className="modal">
-            <div className="modal-box">
+            <div className="modal-box bg-background">
               <h3 className="font-bold text-lg">ویرایش نظر</h3>
               <div className="modal-action">
                 <form method="dialog">

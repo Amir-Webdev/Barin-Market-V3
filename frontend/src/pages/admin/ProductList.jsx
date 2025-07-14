@@ -3,7 +3,11 @@ import {
   useCreateProductMutation,
   useDeleteProductMutation,
 } from "../../store/slices/api/productApiSlice";
-import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import {
+  HiOutlineTrash,
+  HiOutlinePencilAlt,
+  HiOutlinePlus,
+} from "react-icons/hi";
 import Loader from "../../components/UI/Loader";
 import Message from "../../components/UI/Message";
 import Button from "../../components/UI/Button";
@@ -137,7 +141,7 @@ function ProductList() {
             <span className="loading loading-spinner" />
           ) : (
             <>
-              <FaPlus className="ml-1" />
+              <HiOutlinePlus className="ml-1" />
               ایجاد محصول جدید
             </>
           )}
@@ -206,13 +210,13 @@ function ProductList() {
                         }
                         className="btn btn-ghost btn-sm text-blue-600"
                       >
-                        <FaEdit />
+                        <HiOutlinePencilAlt size={14} />
                       </button>
                       <button
                         onClick={() => setDeleteTarget(product)}
                         className="btn btn-ghost btn-sm text-red-600"
                       >
-                        <FaTrash />
+                        <HiOutlineTrash size={14} />
                       </button>
                     </td>
                   </tr>

@@ -17,18 +17,7 @@ function OrderDashboard() {
   } = useGetMyOrdersQuery();
   return (
     <>
-      <SEOMeta
-        title="پروفایل من | فروشگاه بارین"
-        description="اطلاعات پروفایل خود را مشاهده و ویرایش کنید. تاریخچه سفارش‌های خود را بررسی کنید."
-        keywords="پروفایل کاربر، فروشگاه، بارین"
-        canonical={window.location.href}
-        openGraph={{
-          title: "پروفایل من | فروشگاه بارین",
-          description:
-            "اطلاعات پروفایل خود را مشاهده و ویرایش کنید. تاریخچه سفارش‌های خود را بررسی کنید.",
-          url: window.location.href,
-        }}
-      />
+      <SEOMeta title=" سفارشات کاربر | بارین مارکت" />
 
       <div className="mt-10 text-right px-4 w-full max-w-screen-xl flex-1">
         {/* Orders Table */}
