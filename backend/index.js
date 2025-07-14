@@ -1,9 +1,3 @@
-/**
- * 🔵 **What**: E-Commerce Backend Server
- * 🟠 **How**: REST API with Express + MongoDB
- * 🔴 **Why**: Centralizes business logic and data access
- * 💎 **Pro Tip**: Compare to Next.js API routes for full-stack apps
- */
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -18,101 +12,64 @@ import requestLogger from "./utils/requestLogger.js";
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 
-// ======================
-// 🌿 ENVIRONMENT SETUP
-// ======================
-dotenv.config({ path: "./config/.env" }); // 🛡️ **Security**: Never commit .env files
+dotenv.config({ path: "./config/.env" });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ======================
-// ⚡ EXPRESS APPLICATION
-// ======================
 const app = express();
 
-// ======================
-// 🗃️ DATABASE CONNECTION
-// ======================
-connectDatabase(); // 💡 **Tip**: Add retry logic for production
+connectDatabase();
 
-// ======================
-// 🛡️ GLOBAL MIDDLEWARE
-// ======================
-app.use(cookieParser()); // 🍪 **Security**: Always use HttpOnly cookies
+app.use(cookieParser());
 
-// JSON Body Parser
-app.use(express.json({ limit: "10kb" })); // 🚫 **Anti-Pattern**: No raw body parsing
-app.use(express.urlencoded({ extended: true })); // 📝 **Form Data**: Supports nested objects
+app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true }));
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:5173", // 🌐 **Production**: Use allowlist array
-  credentials: true, // 🔐 **Auth**: Required for cookies
-  methods: ["GET", "POST", "PUT", "DELETE"], // 🛠️ **REST**: Standard methods
-  allowedHeaders: ["Content-Type", "Authorization"], // 📦 **Headers**: Minimal allowed
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
-app.use(cors(corsOptions)); // ⚠️ **Warning**: Avoid wildcard (*) origins
+app.use(cors(corsOptions));
 
-// Request Logger (Development Only)
-app.use(requestLogger); // 📜 **Debug**: Add response time logging
+app.use(requestLogger);
 
-// ======================
-// 🛣️ ROUTE DEFINITIONS
-// ======================
-app.use("/api/product", productRoutes); // 🛒 **Products**: CRUD + search
-app.use("/api/user", userRoutes); // 👤 **Users**: Auth + profiles
-app.use("/api/order", orderRoutes); // 📦 **Orders**: Checkout + history
+app.use("/api/product", productRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/order", orderRoutes);
 app.use("/api/review", reviewRoutes);
 
-// ======================
-// 🏗️ PRODUCTION CONFIG
-// ======================
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "..", "/frontend/dist"))); // 🖼️ **Static Files**: Serve React/Vue
+  app.use(express.static(path.join(__dirname, "..", "/frontend/dist")));
 
-  app.get(
-    "*",
-    (
-      req,
-      res // 🔄 **SPA Routing**: Fallback to index.html
-    ) =>
-      res.sendFile(path.join(__dirname, "..", "frontend", "dist", "index.html"))
+  app.get("*", (req, res) =>
+    res.sendFile(path.join(__dirname, "..", "frontend", "dist", "index.html"))
   );
 }
 
-// ======================
-// 🚨 ERROR HANDLING
-// ======================
-app.use(notFound); // 404 Handler: Logs missing routes
-app.use(errorHandler); // 💥 **Global**: JSON error responses
+app.use(notFound);
+app.use(errorHandler);
 
-// ======================
-// 🚀 SERVER INITIALIZATION
-// ======================
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
 });
 
-// ======================
-// ☠️ PROCESS HANDLERS
-// ======================
 process.on("unhandledRejection", (err) => {
-  // 💣 **Async Errors**: Uncaught promises
   console.error("💥 Unhandled Rejection:", err);
   server.close(() => process.exit(1));
 });
 
 process.on("uncaughtException", (err) => {
-  // 🧨 **Sync Errors**: Crash prevention
   console.error("💥 Uncaught Exception:", err);
   server.close(() => process.exit(1));
 });
 
 process.on("SIGTERM", () => {
-  // 🏁 **Kubernetes**: Graceful shutdown
   console.log("🛑 SIGTERM received. Shutting down gracefully...");
   server.close(() => {
     console.log("🔴 Server terminated");
