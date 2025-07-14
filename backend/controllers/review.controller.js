@@ -110,4 +110,32 @@ async function getUserReviews(req, res, next) {
   res.status(200).json(populatedUser.reviews);
 }
 
-export { deleteReview, createProductReview, getUserReviews };
+// @desc    Edit Product Review
+// @route   PUT /api/review/:userId/:reviewId
+// @access  Private
+async function editReview(req, res, next) {
+  const userIdFromCookie = req.user._id.toString();
+  const { userId: userIdFromParams } = req.params;
+  const { newComment, reviewId } = req.body;
+
+  if (userIdFromCookie !== userIdFromParams)
+    return next(newError(403, "مجاز به حذف این نظر نیستید"));
+
+  if (!userIdFromParams || !productId || !reviewId)
+    return next(newError(400, "یک یا چند پارامتر مورد نیاز موجود نیست"));
+
+  const review = await Review.findById(reviewId);
+
+  if (!review) return next(newError(404, "نظر یافت نشد"));
+
+  review.comment = newComment;
+
+  const updatedReview = await review.save();
+
+  if (!updatedReview)
+    return next(newError(400, "مشکلی در تغییر نظر بوجود آمد. مجددا تلاش کنید"));
+
+  res.status(202).json({ status: success });
+}
+
+export { deleteReview, createProductReview, getUserReviews, editReview };
