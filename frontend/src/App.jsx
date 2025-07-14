@@ -61,11 +61,11 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route element={<AppLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/verify-email" element={<EmailVerification />} />
-              <Route path="/forget-password" element={<ForgetPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/search/:keyword" element={<ProductSearchPage />} />

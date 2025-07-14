@@ -1,11 +1,7 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
 import User from "../models/user.model.js";
 import { newError } from "../utils/errorHandler.js";
 import generateToken from "../utils/generateToken.js";
-import { v4 } from "uuid";
 import { emailSender } from "../utils/emailSender.js";
 import { toPersianDigits } from "../../frontend/src/utils/toPersianDigits.js";
 

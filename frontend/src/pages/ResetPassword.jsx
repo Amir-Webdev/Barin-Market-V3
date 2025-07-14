@@ -4,6 +4,8 @@ import { useResetPasswordRequestMutation } from "../store/slices/api/userApiSlic
 import { toast } from "react-toastify";
 import Loader from "../components/UI/Loader";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
+import Logo from "../components/UI/Logo.jsx";
+import Button from "../components/UI/Button.jsx";
 
 function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -62,94 +64,84 @@ function ResetPassword() {
           url: window.location.href,
         }}
       />
-
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-border mx-2">
-        <div className="p-6 sm:p-8">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">تغییر رمز عبور</h1>
-            <p className="text-gray-500 mt-2">
-              لطفا رمز عبور جدید خود را وارد نمایید
-            </p>
-          </div>
-
-          <form onSubmit={submitHandler} dir="rtl">
-            <div className="space-y-4">
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  رمز عبور جدید
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="حداقل ۶ کاراکتر"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setPasswordError("");
-                  }}
-                  required
-                  autoFocus
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  تکرار رمز عبور جدید
-                </label>
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="تکرار رمز عبور"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                  value={confirmPassword}
-                  onChange={(e) => {
-                    setConfirmPassword(e.target.value);
-                    setPasswordError("");
-                  }}
-                  required
-                />
-              </div>
-
-              {passwordError && (
-                <p className="text-red-500 text-sm mt-1">{passwordError}</p>
-              )}
+      <div className="flex flex-col justify-center items-center min-h-screen px-4 -mt-[6rem] md:mt-0">
+        <div className="flex justify-center mb-6">
+          <Logo size="lg" />
+        </div>
+        <div className="w-full max-w-md rounded-xl border border-border mx-2">
+          <div className="p-6 sm:p-8">
+            <div className="text-center mb-6">
+              <h1 className="text-2xl font-bold text-gray-800">
+                تغییر رمز عبور
+              </h1>
+              <p className="text-gray-500 mt-2">
+                لطفا رمز عبور جدید خود را وارد نمایید
+              </p>
             </div>
 
-            <button
-              type="submit"
-              className={`w-full mt-6 py-2 px-4 rounded-lg bg-primary hover:bg-primary-dark text-white font-medium transition ${
-                isLoading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <div className="flex items-center justify-center space-x-2">
-                  <span>در حال تغییر رمز عبور</span>
-                  <Loader size="sm" />
+            <form onSubmit={submitHandler} dir="rtl">
+              <div className="space-y-4">
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    رمز عبور جدید
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="حداقل ۶ کاراکتر"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setPasswordError("");
+                    }}
+                    required
+                    autoFocus
+                  />
                 </div>
-              ) : (
-                "تغییر رمز عبور"
-              )}
-            </button>
-          </form>
 
-          <div className="flex justify-center mt-6 text-sm text-center">
-            <div className="text-gray-600">
-              <span>بازگشت به صفحه </span>
-              <Link
-                to="/login"
-                className="text-primary hover:text-primary-dark font-medium transition"
-              >
-                ورود
-              </Link>
-            </div>
+                <div>
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    تکرار رمز عبور جدید
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="تکرار رمز عبور"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      setPasswordError("");
+                    }}
+                    required
+                  />
+                </div>
+
+                {passwordError && (
+                  <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+                )}
+              </div>
+
+              <div className="flex justify-center mt-6">
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <span>در حال تغییر رمز عبور</span>
+                      <Loader size="sm" />
+                    </div>
+                  ) : (
+                    "تغییر رمز عبور"
+                  )}
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
