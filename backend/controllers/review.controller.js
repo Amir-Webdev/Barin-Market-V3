@@ -111,12 +111,12 @@ async function getUserReviews(req, res, next) {
 }
 
 // @desc    Edit Product Review
-// @route   PUT /api/review/:userId/:reviewId
+// @route   PUT /api/review/:userId
 // @access  Private
 async function editReview(req, res, next) {
   const userIdFromCookie = req.user._id.toString();
   const { userId: userIdFromParams } = req.params;
-  const { newComment, reviewId } = req.body;
+  const { newComment, newRating, reviewId } = req.body;
 
   if (userIdFromCookie !== userIdFromParams)
     return next(newError(403, "مجاز به حذف این نظر نیستید"));
@@ -129,6 +129,7 @@ async function editReview(req, res, next) {
   if (!review) return next(newError(404, "نظر یافت نشد"));
 
   review.comment = newComment;
+  review.rating = newRating;
 
   const updatedReview = await review.save();
 

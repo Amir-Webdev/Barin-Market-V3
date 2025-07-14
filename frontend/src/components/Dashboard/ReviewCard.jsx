@@ -3,14 +3,17 @@ import { toPersianDate } from "../../utils/toPersianDate";
 import Rating from "../Product/Rating";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
-import { useDeleteUserReviewMutation } from "../../store/slices/api/userApiSlice";
+import {
+  useDeleteUserReviewMutation,
+  useEditUserReviewMutation,
+} from "../../store/slices/api/userApiSlice";
 import { toast } from "react-toastify";
 
 function ReviewCard({ review, userId, refetchReviews, isLoadingReviews }) {
-  console.log(review);
-
   const [deleteReview, { isLoading: isDeleting }] =
     useDeleteUserReviewMutation();
+
+  const [editReview, { isLoading: isEditing }] = useEditUserReviewMutation();
 
   async function handleDeleteComment(reviewId, productId) {
     try {
@@ -22,7 +25,15 @@ function ReviewCard({ review, userId, refetchReviews, isLoadingReviews }) {
     }
   }
 
-  async function handleEditComment() {}
+  async function handleEditComment(reviewId) {
+    // try {
+    //   await editReview({ newComment, newRating, userId, reviewId }).unwrap();
+    //   refetchReviews();
+    //   toast.success("نظر با موفقیت تغییر یافت ");
+    // } catch (error) {
+    //   toast.error("تغییر نظر با با شکست مواجه شد. مجددا تلاش کنید.");
+    // }
+  }
   return (
     <div className="card bg-base-100 shadow-md border border-base-300 transition hover:shadow-lg">
       <div className="card-body p-4">

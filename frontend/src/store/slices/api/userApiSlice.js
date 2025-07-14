@@ -90,6 +90,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User", "Product"],
     }),
+    editUserReview: builder.mutation({
+      query: ({ newComment, newRating, reviewId, userId }) => ({
+        url: `${REVIEW_URL}/${userId}`,
+        method: "PUT",
+        body: { newComment, newRating, reviewId },
+      }),
+    }),
     getLikedProducts: builder.query({
       query: (data) => ({
         url: `${USER_URL}/${data.userId}/likes`,
@@ -114,4 +121,5 @@ export const {
   useGetUserReviewsQuery,
   useDeleteUserReviewMutation,
   useGetLikedProductsQuery,
+  useEditUserReviewMutation,
 } = userApiSlice;
