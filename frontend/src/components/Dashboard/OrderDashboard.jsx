@@ -30,7 +30,7 @@ function OrderDashboard() {
         }}
       />
 
-      <div className="mt-10 rtl text-right px-4 w-full max-w-screen-lg">
+      <div className="mt-10 text-right px-4 w-full max-w-screen-xl flex-1">
         {/* Orders Table */}
         <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">
           سفارش‌های من
