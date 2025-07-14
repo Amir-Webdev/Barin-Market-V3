@@ -61,7 +61,7 @@ function Order() {
   if (isLoading) return <Loader />;
   if (error)
     return (
-      <Message type="danger">
+      <Message type="error">
         {error?.data?.message || error.error || "خطا در بارگذاری جزئیات سفارش"}
       </Message>
     );
@@ -132,7 +132,7 @@ function Order() {
                   پرداخت شده در تاریخ {order.paidAt}
                 </Message>
               ) : (
-                <Message type="danger">پرداخت نشده</Message>
+                <Message type="error">پرداخت نشده</Message>
               )}
             </div>
           </div>

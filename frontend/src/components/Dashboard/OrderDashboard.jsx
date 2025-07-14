@@ -39,7 +39,7 @@ function OrderDashboard() {
         {loadingOrders ? (
           <Loader />
         ) : getMyOrdersError ? (
-          <Message type="danger">
+          <Message type="error">
             {getMyOrdersError?.data?.message || getMyOrdersError?.message}
           </Message>
         ) : (

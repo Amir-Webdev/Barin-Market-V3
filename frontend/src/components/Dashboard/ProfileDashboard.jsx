@@ -76,7 +76,7 @@ function ProfileDashboard({ userInfo }) {
 
   return (
     <>
-      <SEOMeta title="  پروفایل کاربری | فروشگاه بارین" />
+      <SEOMeta title="پروفایل کاربری | فروشگاه بارین" />
       <div className="max-w-xl mx-auto mt-16 p-8 bg-background border border-border rounded-2xl space-y-6 mb-16">
         <h2 className="text-2xl font-semibold text-center">پروفایل کاربر</h2>
 

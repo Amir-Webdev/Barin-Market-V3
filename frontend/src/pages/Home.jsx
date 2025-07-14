@@ -48,7 +48,7 @@ function Home() {
             <p>در حال بارگذاری محصولات...</p>
           </div>
         ) : error ? (
-          <Message type="danger">
+          <Message type="error">
             {error?.data?.message || error?.error || "خطا در بارگذاری محصولات"}
           </Message>
         ) : (

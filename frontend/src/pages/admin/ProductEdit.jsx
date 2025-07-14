@@ -203,7 +203,7 @@ function ProductEdit() {
           {[getProductError, updateError, imageUploadError].map(
             (err, i) =>
               err && (
-                <Message key={i} type="danger">
+                <Message key={i} type="error">
                   {err?.data?.message || err.message}
                 </Message>
               )

@@ -1,36 +1,44 @@
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import { MdOutlineError } from "react-icons/md";
-import { BiCheckCircle } from "react-icons/bi";
-import { IoWarningOutline } from "react-icons/io5";
-import { IoMdClose } from "react-icons/io";
+import {
+  HiOutlineCheckCircle,
+  HiOutlineInformationCircle,
+  HiOutlineXCircle,
+  HiOutlineExclamationCircle,
+} from "react-icons/hi";
 import { useState } from "react";
 
-const typeMap = {
-  info: {
-    color: "info",
-    icon: <AiOutlineInfoCircle className="w-5 h-5" />,
-  },
-  success: {
-    color: "success",
-    icon: <BiCheckCircle className="w-5 h-5" />,
-  },
-  danger: {
-    color: "error",
-    icon: <MdOutlineError className="w-5 h-5" />,
-  },
-};
-
-function Message({ type = "info", children, title, dismissible = false }) {
+function Message({
+  type = "info",
+  children,
+  title,
+  dismissible = false,
+  outline = true,
+}) {
   const [visible, setVisible] = useState(true);
 
   if (!visible) return null;
 
-  const { color, icon } = typeMap[type] || typeMap.info;
-
   return (
     <div className="p-6">
-      <div className={`alert alert-${color} shadow-md relative`} role="alert">
-        {icon}
+      {/*  CHANGE ICONS TO HERO ICONS OUTLINE  */}
+
+      <div
+        className={`alert ${
+          type === "error"
+            ? "alert-error"
+            : type === "success"
+            ? "alert-success"
+            : type === "warning"
+            ? "alert-warning"
+            : "alert-info"
+        } shadow-md relative ${outline && "alert-outline"}`}
+        role="alert"
+      >
+        {type === "error" && <HiOutlineXCircle className="w-5 h-5" />}
+        {type === "info" && <HiOutlineInformationCircle className="w-5 h-5" />}
+        {type === "warning" && (
+          <HiOutlineExclamationCircle className="w-5 h-5" />
+        )}
+        {type === "success" && <HiOutlineCheckCircle className="w-5 h-5" />}
         <div>
           {title && <h3 className="font-bold mb-0.5">{title}</h3>}
           <p>{children}</p>

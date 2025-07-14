@@ -96,7 +96,7 @@ function UserList() {
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <Message type="danger">
+          <Message type="error">
             {error?.data?.message || "خطا در بارگذاری کاربران"}
           </Message>
         ) : (

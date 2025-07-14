@@ -133,7 +133,7 @@ function PlaceOrder() {
 
           {error && (
             <div>
-              <Message type="danger">
+              <Message type="error">
                 {error.data?.message || error.error || "خطا در ثبت سفارش"}
               </Message>
             </div>

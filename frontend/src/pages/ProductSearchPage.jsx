@@ -79,7 +79,7 @@ const ProductSearchPage = () => {
                 <Loader size="3xl" />
               </div>
             ) : isError ? (
-              <Message type="danger">
+              <Message type="error">
                 خطا در دریافت محصولات. لطفا دوباره تلاش کنید.
               </Message>
             ) : (
