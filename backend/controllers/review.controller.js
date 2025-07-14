@@ -121,7 +121,7 @@ async function editReview(req, res, next) {
   if (userIdFromCookie !== userIdFromParams)
     return next(newError(403, "مجاز به حذف این نظر نیستید"));
 
-  if (!userIdFromParams || !productId || !reviewId)
+  if (!userIdFromParams || !reviewId)
     return next(newError(400, "یک یا چند پارامتر مورد نیاز موجود نیست"));
 
   const review = await Review.findById(reviewId);
@@ -136,7 +136,7 @@ async function editReview(req, res, next) {
   if (!updatedReview)
     return next(newError(400, "مشکلی در تغییر نظر بوجود آمد. مجددا تلاش کنید"));
 
-  res.status(202).json({ status: success });
+  res.status(202).json({ status: "success" });
 }
 
 export { deleteReview, createProductReview, getUserReviews, editReview };

@@ -3,6 +3,7 @@ import Loader from "../UI/Loader";
 import Message from "../UI/Message";
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
+import SEOMeta from "../Util/SEOMeta";
 
 function CommentDashboard({ userId }) {
   const [reviews, setReviews] = useState([]);
@@ -34,21 +35,23 @@ function CommentDashboard({ userId }) {
       </div>
     );
 
-  console.log(reviews);
   return (
-    <div className="flex-1 my-6 mx-4">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {reviews.map((review) => (
-          <ReviewCard
-            key={review._id}
-            review={review}
-            userId={userId}
-            refetchReviews={refetch}
-            isLoadingReviews={isLoadingReviews}
-          />
-        ))}
+    <>
+      <SEOMeta title=" نظرات کاربر | بارین مارکت" />
+      <div className="flex-1 my-6 mx-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((review) => (
+            <ReviewCard
+              key={review._id}
+              review={review}
+              userId={userId}
+              refetchReviews={refetch}
+              isLoadingReviews={isLoadingReviews}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
