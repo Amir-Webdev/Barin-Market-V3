@@ -1,10 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import notFoundAnimation from "../animation/404NotFound.animation.json";
 import SEOMeta from "../components/Util/SEOMeta.jsx";
+import Button from "../components/UI/Button.jsx";
 
 const NotFound = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <SEOMeta
@@ -21,7 +24,7 @@ const NotFound = () => {
       />
 
       <div
-        className=" flex flex-col items-center my-12 justify-center px-4 text-center text-gray-700"
+        className=" flex flex-col items-center my-12 justify-center px-4 text-center"
         dir="rtl"
       >
         <div className="max-w-sm w-full mb-6">
@@ -33,26 +36,19 @@ const NotFound = () => {
           />
         </div>
 
-        <h1 className="text-3xl font-bold text-gray-600 mb-4">
-          صفحه مورد نظر یافت نشد
-        </h1>
+        <h1 className="text-3xl font-bold mb-4">صفحه مورد نظر یافت نشد</h1>
 
-        <p className="text-lg text-gray-500 mb-6 leading-relaxed">
+        <p className="text-lg mb-6 leading-relaxed">
           صفحه‌ای که به دنبال آن هستید وجود ندارد یا منتقل شده است.
           <br />
           اجازه دهید شما را به مسیر درست هدایت کنیم.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 flex-row-reverse">
-          <Link to="/" className="btn btn-primary px-6">
-            بازگشت به صفحه اصلی
-          </Link>
-          <button
-            onClick={() => window.history.back()}
-            className="btn btn-outline px-6"
-          >
-            بازگشت به صفحه قبل
-          </button>
+          <Button outline={false}>
+            <Link to="/">صفحه اصلی</Link>
+          </Button>
+          <Button onClick={() => navigate(-1)}>بازگشت به صفحه قبل</Button>
         </div>
       </div>
     </>
