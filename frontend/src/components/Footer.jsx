@@ -199,9 +199,15 @@ function Footer() {
             </span>
           </p>
         </div>
-        <div className="flex gap-10 justify-center items-center">
-          <img src={ENAMAD_URL} alt="اینماد" className="h-32 w-32" />
-          <img src={SAMANDEHI_URL} alt="ساماندهی" className="h-32 w-32" />
+        <div className="flex gap-10 justify-center items-center grayscale">
+          <div className="flex flex-col justify-between items-center">
+            <img src={ENAMAD_URL} alt="اینماد" className="h-32 w-32" />
+            <p className="text-sm">در حال ثبت</p>
+          </div>
+          <div className="flex flex-col justify-between items-center">
+            <img src={SAMANDEHI_URL} alt="ساماندهی" className="h-32 w-32" />
+            <p className="text-sm">در حال ثبت</p>
+          </div>
         </div>
       </div>
 

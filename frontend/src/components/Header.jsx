@@ -111,7 +111,10 @@ function Header() {
               <HiOutlineViewGrid className="text-xl -mt-1" />
               دسته بندی ها
             </Link>
-            <Link className="flex gap-2 items-center btn btn-ghost rounded-lg">
+            <Link
+              className="flex gap-2 items-center btn btn-ghost rounded-lg"
+              to="/about"
+            >
               <HiOutlinePhone className="text-xl -mt-1" />
               درباره ما
             </Link>
