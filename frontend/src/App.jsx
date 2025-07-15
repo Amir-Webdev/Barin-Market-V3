@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import MobileMenu from "./components/Mobile/MobileMenu";
 import AppLayout from "./components/UI/AppLayout";
 import Terms from "./pages/Terms";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 // Lazily loaded pages
 const Cart = lazy(() => import("./pages/Cart"));
@@ -72,6 +73,7 @@ function App() {
               <Route path="/search/:keyword" element={<ProductSearchPage />} />
               <Route path="/products" element={<Products />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/shipping" element={<Shipping />} />
                 <Route path="/payment" element={<Payment />} />

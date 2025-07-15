@@ -129,6 +129,9 @@ function Footer() {
           <Link to="/terms" className="link link-hover text-xs">
             قوانین و مقررات
           </Link>
+          <Link to="/privacy" className="link link-hover text-xs">
+            حریم خصوصی
+          </Link>
         </nav>
         <nav>
           <h6 className="mb-2 font-semibold">با ما همراه باشید</h6>

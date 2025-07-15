@@ -3,7 +3,7 @@ import SEOMeta from "../components/Util/SEOMeta";
 function Terms() {
   return (
     <>
-      <SEOMeta title=" قوانین و مقررات | بارین مارکت" />;
+      <SEOMeta title=" قوانین و مقررات | بارین مارکت" />
       <div className="max-w-3xl mx-auto px-4 py-8 text-right">
         <h1 className="text-2xl font-bold mb-6 border-b pb-2">
           قوانین و مقررات فروشگاه
