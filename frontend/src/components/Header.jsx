@@ -115,14 +115,17 @@ function Header() {
               <HiOutlinePhone className="text-xl -mt-1" />
               درباره ما
             </Link>
-            <Link className="flex gap-2 items-center btn btn-ghost rounded-lg">
+            <Link
+              className="flex gap-2 items-center btn btn-ghost rounded-lg"
+              to="/contact"
+            >
               <HiOutlineInformationCircle className="text-xl -mt-1" />
               تماس با ما
             </Link>
           </ul>
           <div className="flex gap-3 items-center border bg-white/60 backdrop-blur-lg rounded-xl px-4 py-3">
             <span className="font-bold text-sm">
-              {toPersianDigits("026123456")}
+              {toPersianDigits("02634095039")}
             </span>
             <MdPhoneInTalk className="text-xl" />
           </div>

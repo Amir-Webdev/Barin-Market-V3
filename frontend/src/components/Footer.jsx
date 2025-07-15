@@ -45,7 +45,7 @@ function Footer() {
               شماره تماس:
               <span className="font-bold">
                 {" "}
-                {toPersianDigits("026123456")}{" "}
+                {toPersianDigits("02634095039")}{" "}
               </span>
             </p>
             <div className="border-r-[1.5px] border-slate-500/60 h-4 w-1"></div>
@@ -102,8 +102,10 @@ function Footer() {
         <nav>
           <h6 className="mb-2 font-semibold">خدمات</h6>
           <Link className="link link-hover text-xs">درباره ما</Link>
+          <Link className="link link-hover text-xs" to="/contact">
+            تماس با ما
+          </Link>
           <Link className="link link-hover text-xs">پرسش های متداول</Link>
-          <Link className="link link-hover text-xs">تماس با ما</Link>
           <Link className="link link-hover text-xs">خدمات پس از فروش</Link>
         </nav>
         <nav>

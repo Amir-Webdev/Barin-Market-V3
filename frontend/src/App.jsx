@@ -25,6 +25,7 @@ import MobileMenu from "./components/Mobile/MobileMenu";
 import AppLayout from "./components/UI/AppLayout";
 import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ContactUs from "./pages/ContactUs";
 
 // Lazily loaded pages
 const Cart = lazy(() => import("./pages/Cart"));
@@ -74,6 +75,7 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/contact" element={<ContactUs />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/shipping" element={<Shipping />} />
                 <Route path="/payment" element={<Payment />} />

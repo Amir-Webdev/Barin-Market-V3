@@ -9,7 +9,7 @@ function Terms() {
           قوانین و مقررات فروشگاه
         </h1>
 
-        <div className="space-y-6 leading-loose text-justify text-gray-700">
+        <div className="space-y-6 leading-loose text-justify">
           <section>
             <h2 className="font-semibold text-lg mb-2">1. معرفی فروشگاه</h2>
             <p>
