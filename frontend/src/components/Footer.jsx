@@ -101,7 +101,9 @@ function Footer() {
       <div className="footer sm:footer-horizontal px-5">
         <nav>
           <h6 className="mb-2 font-semibold">خدمات</h6>
-          <Link className="link link-hover text-xs">درباره ما</Link>
+          <Link className="link link-hover text-xs" to="/about">
+            درباره ما
+          </Link>
           <Link className="link link-hover text-xs" to="/contact">
             تماس با ما
           </Link>
@@ -119,10 +121,10 @@ function Footer() {
         </nav>
         <nav>
           <h6 className="mb-2 font-semibold">صفحات مهم وبسایت</h6>
-          <Link to="/" className="link link-hover text-xs">
+          <Link to="/contact" className="link link-hover text-xs">
             تماس با ما
           </Link>
-          <Link to="/" className="link link-hover text-xs">
+          <Link to="/about" className="link link-hover text-xs">
             درباره ما
           </Link>
           <Link to="/" className="link link-hover text-xs">
