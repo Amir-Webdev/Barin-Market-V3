@@ -54,7 +54,7 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, userInfo }) {
             </div>
           )}
           <li onClick={toggleMenu} className="mt-8">
-            <Link className="flex">
+            <Link className="flex" to="/">
               <HiOutlineHome className="text-xl" />
               خانه
             </Link>
@@ -66,13 +66,13 @@ function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, userInfo }) {
             </Link>
           </li>
           <li onClick={toggleMenu} className="mt-4">
-            <Link className="flex">
+            <Link className="flex" to="/about">
               <HiOutlinePhone className="text-xl" />
               درباره ما
             </Link>
           </li>
           <li onClick={toggleMenu} className="mt-4">
-            <Link className="flex">
+            <Link className="flex" to="/contact">
               <HiOutlineInformationCircle className="text-xl" />
               تماس با ما
             </Link>
