@@ -6,7 +6,9 @@ function AppLayout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

@@ -27,7 +27,7 @@ function Dashboard() {
   }, [location.search]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row md:justify-start">
+    <div className=" flex flex-col md:flex-row md:justify-start">
       {/* SideBar */}
       <div className="md:w-56">
         <DashboardSidebar userInfo={userInfo} />

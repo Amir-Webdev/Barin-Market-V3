@@ -47,7 +47,7 @@ function Cart() {
         }}
       />
 
-      <div className="container mx-auto px-4 py-8 min-h-screen">
+      <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl md:text-3xl font-bold">سبد خرید شما</h1>
           <Button onClick={() => navigate(-1)}>

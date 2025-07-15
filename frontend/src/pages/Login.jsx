@@ -53,7 +53,7 @@ function Login() {
         }}
       />
 
-      <div className="flex flex-col justify-center items-center min-h-screen px-4 -mt-[6rem] md:mt-0">
+      <div className="flex flex-col justify-center items-center  px-4 -mt-[6rem] md:mt-0">
         <div className="flex justify-center mb-6">
           <Logo size="lg" />
         </div>

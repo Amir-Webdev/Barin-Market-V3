@@ -21,7 +21,7 @@ const NotFound = () => {
       />
 
       <div
-        className="min-h-screen flex flex-col items-center my-12 justify-center px-4 text-center text-gray-700"
+        className=" flex flex-col items-center my-12 justify-center px-4 text-center text-gray-700"
         dir="rtl"
       >
         <div className="max-w-sm w-full mb-6">

@@ -126,6 +126,9 @@ function Footer() {
           <Link to="/" className="link link-hover text-xs">
             پاسخ به پرسش های متداول
           </Link>
+          <Link to="/rules" className="link link-hover text-xs">
+            قوانین و مقررات
+          </Link>
         </nav>
         <nav>
           <h6 className="mb-2 font-semibold">با ما همراه باشید</h6>
